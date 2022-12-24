@@ -17,10 +17,13 @@ npm i svg-annotator
 ```
 import SvgAnnotator from "svg-annotator";
 
-add in your template:
+add in your template, wrap the element to be annotated with the SvgAnnotator.
+You need to place a single element inside (div, section, or svg), as the SvgAnnotator will base its size upon the first slotted element.
 
 <SvgAnnotator>
-    ...any html content, components, etc
+    <div>
+        ... any content you want
+    </div>
 </SvgAnnotator>
 ```
 
