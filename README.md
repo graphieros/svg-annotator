@@ -32,22 +32,29 @@ You need to place a single element inside (div, section, or svg), as the SvgAnno
 ## Props
 ```
    fixedTools: {
+      // if true, toolbox will be fixed to top center of your page. 
+      // Ideal to use when a whole page is slotted inside the SvgAnnotator.
       type: Boolean,
       default: false,
     },
     fontFamily: {
+      // The font family your slotted elements are using. 
+      // In print mode, all fonts will be converted to Helvetica, so you need to provide your font here, to revert to it after print is resumed.
       type: String,
       default: "Helvetica",
     },
     hideWhenFolded: {
+      // Hide annotations when the toolbox is closed.
       type: Boolean,
       default: false,
     },
     showPrint: {
+      // Show the print button in the toolbox
       type: Boolean,
       default: false,
     },
     translations: {
+      // Translations for all labels used in the toolbox
       type: Object,
       default() {
         return {
