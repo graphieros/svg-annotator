@@ -30,7 +30,7 @@
               showCaret = false;
             "
           >
-            <svg style="width: 80%; margin-bottom: -4px" viewBox="0 0 24 24">
+            <svg style="width: 80%" viewBox="0 0 24 24">
               <path
                 d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
               />
@@ -56,7 +56,7 @@
               showCaret = false;
             "
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%" viewBox="0 0 24 24">
               <path
                 d="M13,11H18L16.5,9.5L17.92,8.08L21.84,12L17.92,15.92L16.5,14.5L18,13H13V18L14.5,16.5L15.92,17.92L12,21.84L8.08,17.92L9.5,16.5L11,18V13H6L7.5,14.5L6.08,15.92L2.16,12L6.08,8.08L7.5,9.5L6,11H11V6L9.5,7.5L8.08,6.08L12,2.16L15.92,6.08L14.5,7.5L13,6V11Z"
               />
@@ -82,7 +82,7 @@
               showCaret = false;
             "
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%;" viewBox="0 0 24 24">
               <path
                 d="M23,15H21V17H23V15M23,11H21V13H23V11M23,19H21V21C22,21 23,20 23,19M15,3H13V5H15V3M23,7H21V9H23V7M21,3V5H23C23,4 22,3 21,3M3,21H11V15H1V19A2,2 0 0,0 3,21M3,7H1V9H3V7M15,19H13V21H15V19M19,3H17V5H19V3M19,19H17V21H19V19M3,3C2,3 1,4 1,5H3V3M3,11H1V13H3V11M11,3H9V5H11V3M7,3H5V5H7V3Z"
               />
@@ -104,7 +104,7 @@
               bringShapeTo('front');
             "
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%;" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M2,2H11V6H9V4H4V9H6V11H2V2M22,13V22H13V18H15V20H20V15H18V13H22M8,8H16V16H8V8Z"
@@ -127,7 +127,7 @@
               bringShapeTo('back');
             "
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%;" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M2,2H11V11H2V2M9,4H4V9H9V4M22,13V22H13V13H22M15,20H20V15H15V20M16,8V11H13V8H16M11,16H8V13H11V16Z"
@@ -151,7 +151,7 @@
               copyPaste();
             "
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%;" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
@@ -175,7 +175,7 @@
               undoLastShape();
             "
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%;" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
@@ -189,7 +189,7 @@
             :class="{ 'button-tool': true }"
             @click="print"
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%;" viewBox="0 0 24 24">
               <path
                 fill="grey"
                 d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
@@ -406,7 +406,7 @@
               activeShape = undefined;
             "
           >
-            <svg style="width: 80%; margin-bottom: -7px" viewBox="0 0 24 24">
+            <svg style="width: 80%;" viewBox="0 0 24 24">
               <path
                 d="M18.5,4L19.66,8.35L18.7,8.61C18.25,7.74 17.79,6.87 17.26,6.43C16.73,6 16.11,6 15.5,6H13V16.5C13,17 13,17.5 13.33,17.75C13.67,18 14.33,18 15,18V19H9V18C9.67,18 10.33,18 10.67,17.75C11,17.5 11,17 11,16.5V6H8.5C7.89,6 7.27,6 6.74,6.43C6.21,6.87 5.75,7.74 5.3,8.61L4.34,8.35L5.5,4H18.5Z"
               />
@@ -459,7 +459,7 @@
               "
             >
               <svg
-                style="width: 24px; height: 24px; margin-bottom: -6px"
+                style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -489,7 +489,7 @@
               "
             >
               <svg
-                style="width: 24px; height: 24px; margin-bottom: -6px"
+                style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -519,7 +519,7 @@
               "
             >
               <svg
-                style="width: 24px; height: 24px; margin-bottom: -6px"
+                style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -550,7 +550,7 @@
               "
             >
               <svg
-                style="width: 24px; height: 24px; margin-bottom: -6px"
+                style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -579,7 +579,7 @@
               "
             >
               <svg
-                style="width: 24px; height: 24px; margin-bottom: -7px"
+                style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -608,7 +608,7 @@
               "
             >
               <svg
-                style="width: 24px; height: 24px; margin-bottom: -7px"
+                style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -637,7 +637,7 @@
               "
             >
               <svg
-                style="width: 24px; height: 24px; margin-bottom: -7px"
+                style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -792,8 +792,8 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 // TODO:
 // . visibility toggle button, showing on svg TR if shapes
 // . save to JSON emit
@@ -1065,173 +1065,143 @@ export default {
             const shapeWidthMax = shape.strokeWidth > 3 ? 5 : 10;
             const shapeWidthMin = shape.strokeWidth > 3 ? 2.5 : 5;
             return `
-                          <defs>
-                            <marker 
-                              id="${shape.id}" 
-                              markerWidth="${shapeWidthMax}" 
-                              markerHeight="${shapeWidthMax}" 
-                              refX="0" 
-                              refY="${shapeWidthMin}" 
-                              orient="auto"
-                            >
-                              <polygon 
-                                points="0 0,${shapeWidthMax} ${shapeWidthMin}, 0 ${shapeWidthMax}" 
-                                fill="${shape.color}"
-                              />
-                            </marker>
-                          </defs>
-                          ${this.includeSelectionIndicator(shape)}
-                          <g id="${shape.id}">
-                              <path 
-                                style="stroke-linecap: round !important; ${
-                                  shape.isDash
-                                    ? `stroke-dasharray: ${
-                                        shape.strokeWidth * 3
-                                      }`
-                                    : ""
-                                }" 
-                                stroke="${shape.color}" 
-                                id="${shape.id}" 
-                                d="M${shape.x},${shape.y} ${shape.endX},${
-              shape.endY
-            }" 
-                                stroke-width="${shape.strokeWidth}" 
-                                marker-end="url(#${shape.id})"
-                                />
-                          </g>
-                          <g id="${shape.id}">
-                            <rect 
-                              id="${shape.id}"
-                              x="${shape.x - 10}"
-                              y="${shape.y - 10}"
-                              height="20"
-                              width="20"
-                              fill="rgba(0,0,0,0.3)"
-                              style="display:${
-                                this.isResizeMode || this.isMoveMode
-                                  ? "initial"
-                                  : "none"
-                              }; rx:1 !important; ry:1 !important;"
-                            />
-                          </g>
-                            ${this.includeDeleteButton(shape)}
-                          </g>
-                          `;
+						<defs>
+						  <marker 
+							id="${shape.id}" 
+							markerWidth="${shapeWidthMax}" 
+							markerHeight="${shapeWidthMax}" 
+							refX="0" 
+							refY="${shapeWidthMin}" 
+							orient="auto"
+						  >
+							<polygon 
+							  points="0 0,${shapeWidthMax} ${shapeWidthMin}, 0 ${shapeWidthMax}" 
+							  fill="${shape.color}"
+							/>
+						  </marker>
+						</defs>
+						${this.includeSelectionIndicator(shape)}
+						<g id="${shape.id}">
+							<path 
+							  style="stroke-linecap: round !important; ${
+                  shape.isDash
+                    ? `stroke-dasharray: ${shape.strokeWidth * 3}`
+                    : ""
+                }" 
+							  stroke="${shape.color}" 
+							  id="${shape.id}" 
+							  d="M${shape.x},${shape.y} ${shape.endX},${shape.endY}" 
+							  stroke-width="${shape.strokeWidth}" 
+							  marker-end="url(#${shape.id})"
+							  />
+						</g>
+						<g id="${shape.id}">
+						  <rect 
+							id="${shape.id}"
+							x="${shape.x - 10}"
+							y="${shape.y - 10}"
+							height="20"
+							width="20"
+							fill="rgba(0,0,0,0.3)"
+							style="display:${
+                this.isResizeMode || this.isMoveMode ? "initial" : "none"
+              }; rx:1 !important; ry:1 !important;"
+						  />
+						</g>
+						  ${this.includeDeleteButton(shape)}
+						</g>
+						`;
 
           case shape && shape.type === "circle":
             return `
-                                <g id="${shape.id}">
-                                  ${this.includeSelectionIndicator(shape)}
-                                  <circle 
-                                    id="${shape.id}" 
-                                    cx="${shape.x}" 
-                                    cy="${shape.y}" 
-                                    r="${
-                                      shape.circleRadius
-                                        ? shape.circleRadius
-                                        : Number.MIN_VALUE
-                                    }"
-                                    fill="${
-                                      shape.isFilled
-                                        ? shape.color + shape.alpha
-                                        : "rgba(255,255,255,0.001)"
-                                    }" 
-                                    stroke="${shape.color + shape.alpha}" 
-                                    stroke-width="${shape.strokeWidth}"
-                                    style="${
-                                      shape.isDash
-                                        ? `stroke-dasharray: ${
-                                            shape.strokeWidth * 3
-                                          }`
-                                        : ""
-                                    }"
-                                    >
-                                  </circle>
-                                </g>
-                                
-                              ${this.includeDeleteButton(shape)}`;
+							  <g id="${shape.id}">
+								${this.includeSelectionIndicator(shape)}
+								<circle 
+								  id="${shape.id}" 
+								  cx="${shape.x}" 
+								  cy="${shape.y}" 
+								  r="${shape.circleRadius ? shape.circleRadius : Number.MIN_VALUE}"
+								  fill="${
+                    shape.isFilled
+                      ? shape.color + shape.alpha
+                      : "rgba(255,255,255,0.001)"
+                  }" 
+								  stroke="${shape.color + shape.alpha}" 
+								  stroke-width="${shape.strokeWidth}"
+								  style="${shape.isDash ? `stroke-dasharray: ${shape.strokeWidth * 3}` : ""}"
+								  >
+								</circle>
+							  </g>
+							  
+							${this.includeDeleteButton(shape)}`;
 
           case shape && shape.type === "rect":
             return `<g id="${shape.id}">
-                                ${this.includeSelectionIndicator(shape)}
-                                <rect
-                                  id="${this.isResizeMode ? "" : shape.id}"
-                                  x="${shape.x}"
-                                  y="${shape.y}"
-                                  fill="${
-                                    shape.isFilled
-                                      ? shape.color + shape.alpha
-                                      : "rgba(255,255,255,0.001)"
-                                  }"
-                                  height="${shape.rectHeight}"
-                                  width="${shape.rectWidth}"
-                                  stroke="${shape.color + shape.alpha}"
-                                  stroke-width="${shape.strokeWidth}"
-                                  style="rx:1 !important; ry:1 !important; ${
-                                    shape.isDash
-                                      ? `stroke-dasharray: ${
-                                          shape.strokeWidth * 3
-                                        }`
-                                      : ""
-                                  }"
-                                />
-                                <rect id="${shape.id}"
-                                  x="${shape.x + shape.rectWidth}"
-                                  y="${shape.y + shape.rectHeight}"
-                                  height="20"
-                                  width="20"
-                                  fill="rgba(0,0,0,0.3)"
-                                  style="display:${
-                                    this.isResizeMode ? "initial" : "none"
-                                  }; rx:1 !important; ry:1 !important;"
-                                />
-                                ${this.includeDeleteButton(shape)}
-                              </g> `;
+							  ${this.includeSelectionIndicator(shape)}
+							  <rect
+								id="${this.isResizeMode ? "" : shape.id}"
+								x="${shape.x}"
+								y="${shape.y}"
+								fill="${shape.isFilled ? shape.color + shape.alpha : "rgba(255,255,255,0.001)"}"
+								height="${shape.rectHeight}"
+								width="${shape.rectWidth}"
+								stroke="${shape.color + shape.alpha}"
+								stroke-width="${shape.strokeWidth}"
+								style="rx:1 !important; ry:1 !important; ${
+                  shape.isDash
+                    ? `stroke-dasharray: ${shape.strokeWidth * 3}`
+                    : ""
+                }"
+							  />
+							  <rect id="${shape.id}"
+								x="${shape.x + shape.rectWidth}"
+								y="${shape.y + shape.rectHeight}"
+								height="20"
+								width="20"
+								fill="rgba(0,0,0,0.3)"
+								style="display:${
+                  this.isResizeMode ? "initial" : "none"
+                }; rx:1 !important; ry:1 !important;"
+							  />
+							  ${this.includeDeleteButton(shape)}
+							</g> `;
 
           case shape && shape.type === "line":
             return `
-                        <g id="${shape.id}">
-                          <path 
-                            id="${shape.id}" 
-                            d="M${shape.path ? shape.path : ""}" 
-                            style="stroke:${
-                              shape.color + shape.alpha
-                            } !important; fill:none; stroke-width:${
+					  <g id="${shape.id}">
+						<path 
+						  id="${shape.id}" 
+						  d="M${shape.path ? shape.path : ""}" 
+						  style="stroke:${
+                shape.color + shape.alpha
+              } !important; fill:none; stroke-width:${
               shape.strokeWidth
             } !important; stroke-linecap: round !important; stroke-linejoin: round !important;"        
-                          />
-                  ${this.includeDeleteButton(shape)}
-                        </g>
-                      `;
+						/>
+				${this.includeDeleteButton(shape)}
+					  </g>
+					`;
 
           case shape && shape.type === "text":
             const parsedText = shape.textContent.split("‎");
             const parsedContent = [];
             for (let i = 0; i < parsedText.length; i += 1) {
               parsedContent.push(`
-                ${
-                  shape.isBulletTextMode
-                    ? `<tspan x="${shape.x - shape.fontSize}" y="${
-                        shape.y + shape.fontSize * i
-                      }" id="${shape.id}" font-size="${
-                        shape.fontSize / 2
-                      }">⬤</tspan>`
-                    : ""
-                }
-                        <tspan id="${shape.id}" x="${shape.x}" y="${
+			  ${
+          shape.isBulletTextMode
+            ? `<tspan x="${shape.x - shape.fontSize}" y="${
                 shape.y + shape.fontSize * i
-              }">
-                            ${parsedText[i]}
-                        </tspan>`);
+              }" id="${shape.id}" font-size="${shape.fontSize / 2}">⬤</tspan>`
+            : ""
+        }
+					  <tspan id="${shape.id}" x="${shape.x}" y="${shape.y + shape.fontSize * i}">
+						  ${parsedText[i]}
+					  </tspan>`);
             }
             return `
-                              ${this.includeSelectionIndicator(shape)}
-                              ${this.computeTextElement(
-                                shape,
-                                parsedContent,
-                                shape.isBulletTextMode
-                              )}
-                                `;
+							${this.includeSelectionIndicator(shape)}
+							${this.computeTextElement(shape, parsedContent, shape.isBulletTextMode)}
+							  `;
           default:
             break;
         }
@@ -1421,24 +1391,18 @@ export default {
       switch (true) {
         case shape.type === "circle":
           return `
-                        <g id="${shape.id}" style="display:${
+					  <g id="${shape.id}" style="display:${
             this.isDeleteMode ? "initial" : "none"
           };">
-                          <circle id="${shape.id}" cx="${shape.x}" cy="${
-            shape.y
-          }" r="12" fill="red"/>
-                          <line stroke="white" stroke-width="2" id="${
-                            shape.id
-                          }" x1="${shape.x - 4}" y1="${shape.y - 4}" x2="${
-            shape.x + 4
-          }" y2="${shape.y + 4}"/>
-                          <line stroke="white" stroke-width="2" id="${
-                            shape.id
-                          }" x1="${shape.x + 4}" y1="${shape.y - 4}" x2="${
+						<circle id="${shape.id}" cx="${shape.x}" cy="${shape.y}" r="12" fill="red"/>
+						<line stroke="white" stroke-width="2" id="${shape.id}" x1="${
             shape.x - 4
-          }" y2="${shape.y + 4}"/>
-                        </g>
-                    `;
+          }" y1="${shape.y - 4}" x2="${shape.x + 4}" y2="${shape.y + 4}"/>
+						<line stroke="white" stroke-width="2" id="${shape.id}" x1="${
+            shape.x + 4
+          }" y1="${shape.y - 4}" x2="${shape.x - 4}" y2="${shape.y + 4}"/>
+					  </g>
+				  `;
 
         case shape.type === "text":
           // determine position of delete button from textAlign property
@@ -1468,45 +1432,41 @@ export default {
           }
 
           return `
-                        <g id="${shape.id}" style="display:${
+					  <g id="${shape.id}" style="display:${
             this.isDeleteMode ? "initial" : "none"
           };">
-                          <circle id="${shape.id}" cx="${
-            shape.x + offsetX[0]
-          }" cy="${shape.y + offsetY[0]}" r="12" fill="red"/>
-                          <line stroke="white" stroke-width="2" id="${
-                            shape.id
-                          }" x1="${shape.x + offsetX[1]}" y1="${
-            shape.y + offsetY[1]
-          }" x2="${shape.x + offsetX[2]}" y2="${shape.y + offsetY[2]}"/>
-                          <line stroke="white" stroke-width="2" id="${
-                            shape.id
-                          }" x1="${shape.x + offsetX[3]}" y1="${
-            shape.y + offsetY[3]
-          }" x2="${shape.x + offsetX[4]}" y2="${shape.y + offsetY[4]}"/>
-                        </g>
-                    `;
+						<circle id="${shape.id}" cx="${shape.x + offsetX[0]}" cy="${
+            shape.y + offsetY[0]
+          }" r="12" fill="red"/>
+						<line stroke="white" stroke-width="2" id="${shape.id}" x1="${
+            shape.x + offsetX[1]
+          }" y1="${shape.y + offsetY[1]}" x2="${shape.x + offsetX[2]}" y2="${
+            shape.y + offsetY[2]
+          }"/>
+						<line stroke="white" stroke-width="2" id="${shape.id}" x1="${
+            shape.x + offsetX[3]
+          }" y1="${shape.y + offsetY[3]}" x2="${shape.x + offsetX[4]}" y2="${
+            shape.y + offsetY[4]
+          }"/>
+					  </g>
+				  `;
 
         default:
           return `
-                        <g id="${shape.id}" style="display:${
+					  <g id="${shape.id}" style="display:${
             this.isDeleteMode ? "initial" : "none"
           };">
-                          <circle id="${shape.id}" cx="${shape.x - 4}" cy="${
+						<circle id="${shape.id}" cx="${shape.x - 4}" cy="${
             shape.y - 4
           }" r="12" fill="red"/>
-                          <line stroke="white" stroke-width="2" id="${
-                            shape.id
-                          }" x1="${shape.x - 8}" y1="${shape.y - 8}" x2="${
-            shape.x
-          }" y2="${shape.y}"/>
-                          <line stroke="white" stroke-width="2" id="${
-                            shape.id
-                          }" x1="${shape.x}" y1="${shape.y - 8}" x2="${
+						<line stroke="white" stroke-width="2" id="${shape.id}" x1="${
             shape.x - 8
-          }" y2="${shape.y}"/>
-                        </g>
-                    `;
+          }" y1="${shape.y - 8}" x2="${shape.x}" y2="${shape.y}"/>
+						<line stroke="white" stroke-width="2" id="${shape.id}" x1="${shape.x}" y1="${
+            shape.y - 8
+          }" x2="${shape.x - 8}" y2="${shape.y}"/>
+					  </g>
+				  `;
       }
     },
     includeSelectionIndicator(shape) {
@@ -1517,70 +1477,63 @@ export default {
       switch (true) {
         case shape.type === "rect":
           return `
-                      <rect
-                        id="${shape.id}" 
-                        style="stroke-dasharray: 10; display:${
-                          this.hoveredShapeId &&
-                          this.hoveredShapeId === shape.id
-                            ? "initial"
-                            : "none"
-                        }"
-                        x="${shape.x - 20}"
-                        y="${shape.y - 20}"
-                        height="${shape.rectHeight + 40}"
-                        width="${shape.rectWidth + 40}"
-                        fill="transparent"
-                        stroke="grey"
-                      />
-                    `;
+					<rect
+					  id="${shape.id}" 
+					  style="stroke-dasharray: 10; display:${
+              this.hoveredShapeId && this.hoveredShapeId === shape.id
+                ? "initial"
+                : "none"
+            }"
+					  x="${shape.x - 20}"
+					  y="${shape.y - 20}"
+					  height="${shape.rectHeight + 40}"
+					  width="${shape.rectWidth + 40}"
+					  fill="transparent"
+					  stroke="grey"
+					/>
+				  `;
 
         case shape.type === "circle":
           return `
-                      <rect
-                        id="${shape.id}" 
-                        style="stroke-dasharray: 10; display:${
-                          this.hoveredShapeId &&
-                          this.hoveredShapeId === shape.id
-                            ? "initial"
-                            : "none"
-                        }"
-                        x="${shape.x - shape.circleRadius - 20}"
-                        y="${shape.y - shape.circleRadius - 20}"
-                        height="${shape.circleRadius * 2 + 40}"
-                        width="${shape.circleRadius * 2 + 40}"
-                        fill="transparent"
-                        stroke="grey"
-                      />
-                    `;
+					<rect
+					  id="${shape.id}" 
+					  style="stroke-dasharray: 10; display:${
+              this.hoveredShapeId && this.hoveredShapeId === shape.id
+                ? "initial"
+                : "none"
+            }"
+					  x="${shape.x - shape.circleRadius - 20}"
+					  y="${shape.y - shape.circleRadius - 20}"
+					  height="${shape.circleRadius * 2 + 40}"
+					  width="${shape.circleRadius * 2 + 40}"
+					  fill="transparent"
+					  stroke="grey"
+					/>
+				  `;
 
         case shape.type === "arrow":
           const isPositiveX = shape.endX - shape.x > 0;
           const isPositiveY = shape.endY - shape.y > 0;
           return `
-                      <rect
-                        id="${shape.id}" 
-                        style="stroke-dasharray: 10; display:${
-                          this.hoveredShapeId &&
-                          this.hoveredShapeId === shape.id
-                            ? "initial"
-                            : "none"
-                        }"
-                        x="${isPositiveX ? shape.x - 20 : shape.endX - 20}"
-                        y="${isPositiveY ? shape.y - 20 : shape.endY - 20}"
-                        height="${
-                          isPositiveY
-                            ? shape.endY - shape.y + 40
-                            : shape.y - shape.endY + 40
-                        }"
-                        width="${
-                          isPositiveX
-                            ? shape.endX - shape.x + 40
-                            : shape.x - shape.endX + 40
-                        }"
-                        fill="transparent"
-                        stroke="grey"
-                      />
-                    `;
+					<rect
+					  id="${shape.id}" 
+					  style="stroke-dasharray: 10; display:${
+              this.hoveredShapeId && this.hoveredShapeId === shape.id
+                ? "initial"
+                : "none"
+            }"
+					  x="${isPositiveX ? shape.x - 20 : shape.endX - 20}"
+					  y="${isPositiveY ? shape.y - 20 : shape.endY - 20}"
+					  height="${
+              isPositiveY
+                ? shape.endY - shape.y + 40
+                : shape.y - shape.endY + 40
+            }"
+					  width="${isPositiveX ? shape.endX - shape.x + 40 : shape.x - shape.endX + 40}"
+					  fill="transparent"
+					  stroke="grey"
+					/>
+				  `;
 
         case shape.type === "text":
           const selectedText = Array.from(
@@ -1591,22 +1544,21 @@ export default {
           }
           const { x, y, width, height } = selectedText.getBBox();
           return `
-                      <rect
-                        id="${shape.id}" 
-                        style="stroke-dasharray: 10; display:${
-                          this.hoveredShapeId &&
-                          this.hoveredShapeId === shape.id
-                            ? "initial"
-                            : "none"
-                        }"
-                        x="${x - 20}"
-                        y="${y - 20}"
-                        height="${height + 40}"
-                        width="${width + 40}"
-                        fill="transparent"
-                        stroke="grey"
-                      />
-                    `;
+					<rect
+					  id="${shape.id}" 
+					  style="stroke-dasharray: 10; display:${
+              this.hoveredShapeId && this.hoveredShapeId === shape.id
+                ? "initial"
+                : "none"
+            }"
+					  x="${x - 20}"
+					  y="${y - 20}"
+					  height="${height + 40}"
+					  width="${width + 40}"
+					  fill="transparent"
+					  stroke="grey"
+					/>
+				  `;
 
         default:
           return ``;
@@ -1756,7 +1708,7 @@ export default {
           } ${shape.x - 5 - bulletModeOffset},${
             shape.y - shape.fontSize / 6
           }" stroke="black" stroke-width="2" />
-                            <path  d="M${shape.x - 10 - bulletModeOffset},${
+						  <path  d="M${shape.x - 10 - bulletModeOffset},${
             shape.y - shape.fontSize / 3
           } ${shape.x - 5 - bulletModeOffset},${shape.y - shape.fontSize / 6} ${
             shape.x - 10 - bulletModeOffset
@@ -1766,11 +1718,9 @@ export default {
           return `<path d="M${shape.x + 20},${shape.y - shape.fontSize / 6} ${
             shape.x + 5
           },${shape.y - shape.fontSize / 6}" stroke="black" stroke-width="2" />
-                            <path d="M${shape.x + 10},${
-            shape.y - shape.fontSize / 3
-          } ${shape.x + 5},${shape.y - shape.fontSize / 6} ${shape.x + 10},${
-            shape.y
-          }" stroke="black" stroke-width="2">`;
+						  <path d="M${shape.x + 10},${shape.y - shape.fontSize / 3} ${shape.x + 5},${
+            shape.y - shape.fontSize / 6
+          } ${shape.x + 10},${shape.y}" stroke="black" stroke-width="2">`;
 
         default:
           return "";
@@ -1780,147 +1730,138 @@ export default {
       switch (true) {
         case shape.textAlign === "start":
           return `
-                    <g id="${shape.id}">
-                      <rect 
-                          id="${shape.id}" 
-                          style="display:${
-                            this.lastSelectedShape &&
-                            this.lastSelectedShape.id === shape.id
-                              ? "initial"
-                              : "none"
-                          };" 
-                          x="${shape.x}" 
-                          y="${shape.y - 50}" 
-                          height="${
-                            shape.lines === 0 || shape.lines === 1
-                              ? shape.fontSize * 4
-                              : shape.fontSize * 2 * shape.lines
-                          }"
-                          width="100" 
-                          fill="rgba(0,0,0,0)"
-                        />
-                      <text
-                        style="user-select:none; height:100px;"
-                        id="${shape.id}"
-                        x="${shape.x}"
-                        y="${shape.y}"
-                        text-anchor="${shape.textAlign}"
-                        font-size="${shape.fontSize}"
-                        fill="${shape.color}"
-                        font-weight="${shape.isBold ? "bold" : "normal"}"
-                        font-style="${shape.isItalic ? "italic" : "normal"}"
-                        text-decoration="${
-                          shape.isUnderline ? "underline" : "none"
-                        }"
-                        >
-                          ${content.join("")}
-                        </text>
-                        ${
-                          this.showCaret &&
-                          this.lastSelectedShape &&
-                          this.lastSelectedShape.id === shape.id
-                            ? this.computeCaretPosition(shape)
-                            : ""
-                        }
-                        ${this.includeDeleteButton(shape, isBulletTextMode)}
-                    </g> 
-                    `;
+				  <g id="${shape.id}">
+					<rect 
+						id="${shape.id}" 
+						style="display:${
+              this.lastSelectedShape && this.lastSelectedShape.id === shape.id
+                ? "initial"
+                : "none"
+            };" 
+						x="${shape.x}" 
+						y="${shape.y - 50}" 
+						height="${
+              shape.lines === 0 || shape.lines === 1
+                ? shape.fontSize * 4
+                : shape.fontSize * 2 * shape.lines
+            }"
+						width="100" 
+						fill="rgba(0,0,0,0)"
+					  />
+					<text
+					  style="user-select:none; height:100px;"
+					  id="${shape.id}"
+					  x="${shape.x}"
+					  y="${shape.y}"
+					  text-anchor="${shape.textAlign}"
+					  font-size="${shape.fontSize}"
+					  fill="${shape.color}"
+					  font-weight="${shape.isBold ? "bold" : "normal"}"
+					  font-style="${shape.isItalic ? "italic" : "normal"}"
+					  text-decoration="${shape.isUnderline ? "underline" : "none"}"
+					  >
+						${content.join("")}
+					  </text>
+					  ${
+              this.showCaret &&
+              this.lastSelectedShape &&
+              this.lastSelectedShape.id === shape.id
+                ? this.computeCaretPosition(shape)
+                : ""
+            }
+					  ${this.includeDeleteButton(shape, isBulletTextMode)}
+				  </g> 
+				  `;
 
         case shape.textAlign === "middle":
           return `
-                      <g id="${shape.id}">
-                        <rect 
-                          id="${shape.id}" 
-                          style="display:${
-                            this.lastSelectedShape &&
-                            this.lastSelectedShape.id === shape.id
-                              ? "initial"
-                              : "none"
-                          };" 
-                          x="${shape.x - 50}" 
-                          y="${shape.y - 50}" 
-                          height="${
-                            shape.lines === 0 || shape.lines === 1
-                              ? shape.fontSize * 4
-                              : shape.fontSize * 2 * shape.lines
-                          }"
-                          width="100" 
-                          fill="rgba(0,0,0,0)"
-                        />
-                        <text
-                        style="user-select:none; height:100px;"
-                        id="${shape.id}"
-                        x="${shape.x}"
-                        y="${shape.y}"
-                        text-anchor="${shape.textAlign}"
-                        font-size="${shape.fontSize}"
-                        fill="${shape.color}"
-                        font-weight="${shape.isBold ? "bold" : "normal"}"
-                        font-style="${shape.isItalic ? "italic" : "normal"}"
-                        text-decoration="${
-                          shape.isUnderline ? "underline" : "none"
-                        }"
-                        >
-                          ${content.join("")}
-                        </text>
-                        ${
-                          this.showCaret &&
-                          this.lastSelectedShape &&
-                          this.lastSelectedShape.id === shape.id
-                            ? this.computeCaretPosition(shape)
-                            : ""
-                        }
-                        ${this.includeDeleteButton(shape)}
-                      </g>
-                    `;
+					<g id="${shape.id}">
+					  <rect 
+						id="${shape.id}" 
+						style="display:${
+              this.lastSelectedShape && this.lastSelectedShape.id === shape.id
+                ? "initial"
+                : "none"
+            };" 
+						x="${shape.x - 50}" 
+						y="${shape.y - 50}" 
+						height="${
+              shape.lines === 0 || shape.lines === 1
+                ? shape.fontSize * 4
+                : shape.fontSize * 2 * shape.lines
+            }"
+						width="100" 
+						fill="rgba(0,0,0,0)"
+					  />
+					  <text
+					  style="user-select:none; height:100px;"
+					  id="${shape.id}"
+					  x="${shape.x}"
+					  y="${shape.y}"
+					  text-anchor="${shape.textAlign}"
+					  font-size="${shape.fontSize}"
+					  fill="${shape.color}"
+					  font-weight="${shape.isBold ? "bold" : "normal"}"
+					  font-style="${shape.isItalic ? "italic" : "normal"}"
+					  text-decoration="${shape.isUnderline ? "underline" : "none"}"
+					  >
+						${content.join("")}
+					  </text>
+					  ${
+              this.showCaret &&
+              this.lastSelectedShape &&
+              this.lastSelectedShape.id === shape.id
+                ? this.computeCaretPosition(shape)
+                : ""
+            }
+					  ${this.includeDeleteButton(shape)}
+					</g>
+				  `;
 
         case shape.textAlign === "end":
           return `
-                    <g id="${shape.id}">
-                      <rect 
-                          id="${shape.id}" 
-                          style="display:${
-                            this.lastSelectedShape &&
-                            this.lastSelectedShape.id === shape.id
-                              ? "initial"
-                              : "none"
-                          };" 
-                          x="${shape.x - 100}" 
-                          y="${shape.y - 50}" 
-                          height="${
-                            shape.lines === 0 || shape.lines === 1
-                              ? shape.fontSize * 4
-                              : shape.fontSize * 2 * shape.lines
-                          }"
-                          width="100" 
-                          fill="rgba(0,0,0,0)"
-                        />
-                      <text
-                        style="user-select:none; height:100px;"
-                        id="${shape.id}"
-                        x="${shape.x}"
-                        y="${shape.y}"
-                        text-anchor="${shape.textAlign}"
-                        font-size="${shape.fontSize}"
-                        fill="${shape.color}"
-                        font-weight="${shape.isBold ? "bold" : "normal"}"
-                        font-style="${shape.isItalic ? "italic" : "normal"}"
-                        text-decoration="${
-                          shape.isUnderline ? "underline" : "none"
-                        }"
-                        >
-                          ${content.join("")}
-                        </text>
-                        ${
-                          this.showCaret &&
-                          this.lastSelectedShape &&
-                          this.lastSelectedShape.id === shape.id
-                            ? this.computeCaretPosition(shape)
-                            : ""
-                        }
-                        ${this.includeDeleteButton(shape)}
-                    </g> 
-                    `;
+				  <g id="${shape.id}">
+					<rect 
+						id="${shape.id}" 
+						style="display:${
+              this.lastSelectedShape && this.lastSelectedShape.id === shape.id
+                ? "initial"
+                : "none"
+            };" 
+						x="${shape.x - 100}" 
+						y="${shape.y - 50}" 
+						height="${
+              shape.lines === 0 || shape.lines === 1
+                ? shape.fontSize * 4
+                : shape.fontSize * 2 * shape.lines
+            }"
+						width="100" 
+						fill="rgba(0,0,0,0)"
+					  />
+					<text
+					  style="user-select:none; height:100px;"
+					  id="${shape.id}"
+					  x="${shape.x}"
+					  y="${shape.y}"
+					  text-anchor="${shape.textAlign}"
+					  font-size="${shape.fontSize}"
+					  fill="${shape.color}"
+					  font-weight="${shape.isBold ? "bold" : "normal"}"
+					  font-style="${shape.isItalic ? "italic" : "normal"}"
+					  text-decoration="${shape.isUnderline ? "underline" : "none"}"
+					  >
+						${content.join("")}
+					  </text>
+					  ${
+              this.showCaret &&
+              this.lastSelectedShape &&
+              this.lastSelectedShape.id === shape.id
+                ? this.computeCaretPosition(shape)
+                : ""
+            }
+					  ${this.includeDeleteButton(shape)}
+				  </g> 
+				  `;
 
         default:
           return "";
@@ -2253,7 +2194,7 @@ export default {
               }
             }
             pdf.save(
-              `${new Date().toLocaleDateString()}_annotations.pdf`
+              `${new Date().toLocaleDateString()}_ConsumerLive_annotations.pdf`
             );
           })
           .finally(() => {
@@ -2404,21 +2345,24 @@ export default {
   },
 };
 </script>
-  
-  <style lang="scss" scoped>
+
+<style lang="scss" scoped>
 .hide-shape {
   display: none;
 }
 button.button-tool {
-  height: 28px;
-  width: 28px;
-  border: 1px solid grey;
-  border-radius: 6px;
-  opacity: 0.9;
+  align-items:center;
   background: white;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  padding: 2px;
+  border: 1px solid grey;
   cursor: pointer !important;
+  display: flex;
+  height: 28px;
+  justify-content:center;
+  opacity: 0.9;
+  padding: 2px;
+  width: 28px;
   &:hover {
     opacity: 1;
     border: 1px solid #aaa;
@@ -2503,4 +2447,3 @@ summary {
     auto;
 }
 </style>
-  
