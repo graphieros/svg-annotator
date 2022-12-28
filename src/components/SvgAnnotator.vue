@@ -1110,7 +1110,7 @@ export default {
   },
   computed: {
     canSelect() {
-      return this.shapes.filter(shape => shape.type !== 'group').length > 1;
+      return this.shapes.filter(shape => !['line','group'].includes(shape.type)).length > 1;
     },
     colorTransparency() {
       return this.transparencyCodes[
