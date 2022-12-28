@@ -12,18 +12,49 @@
         <summary>{{ translations.title }}</summary>
 
         <div class="tool-selection">
+          <!-- SELECT -->
+          <button
+            :disabled="!canSelect"
+            :class="{
+              'button-tool': true,
+              'button-tool--selected': isSelectMode,
+              'tooltip': true
+            }"
+            @click="
+              deleteEmptyTextElement();
+              setShapeTo('group');
+              isSelectMode = !isSelectMode;
+              isDeleteMode = false;
+              isMoveMode = false;
+              isResizeMode = false;
+              isTextMode = false;
+              isWriting = false;
+              activeShape = 'group';
+              showCaret = false;
+            "
+          >
+            <svg style="width: 80%" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M1,1V5H2V19H1V23H5V22H19V23H23V19H22V5H23V1H19V2H5V1M5,4H19V5H20V19H19V20H5V19H4V5H5M6,6V14H9V18H18V9H14V6M8,8H12V12H8M14,11H16V16H11V14H14" />
+            </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipGroup }}
+            </span>
+          </button>
+
           <!-- DELETE -->
           <button
             :disabled="shapes.length === 0"
             :class="{
               'button-tool': true,
               'button-tool--selected': isDeleteMode,
+              'tooltip': true
             }"
             @click="
               deleteEmptyTextElement();
               isDeleteMode = !isDeleteMode;
               isMoveMode = false;
               isResizeMode = false;
+              isSelectMode = false;
               isTextMode = false;
               isWriting = false;
               activeShape = undefined;
@@ -35,6 +66,9 @@
                 d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipDelete }}
+            </span>
           </button>
 
           <!-- MOVE -->
@@ -43,6 +77,7 @@
             :class="{
               'button-tool': true,
               'button-tool--selected': isMoveMode,
+              'tooltip': true
             }"
             @click="
               deleteEmptyTextElement();
@@ -51,6 +86,7 @@
               isDeleteMode = false;
               isDrawMode = false;
               isResizeMode = false;
+              isSelectMode = false;
               isTextMode = false;
               isWriting = false;
               showCaret = false;
@@ -61,6 +97,9 @@
                 d="M13,11H18L16.5,9.5L17.92,8.08L21.84,12L17.92,15.92L16.5,14.5L18,13H13V18L14.5,16.5L15.92,17.92L12,21.84L8.08,17.92L9.5,16.5L11,18V13H6L7.5,14.5L6.08,15.92L2.16,12L6.08,8.08L7.5,9.5L6,11H11V6L9.5,7.5L8.08,6.08L12,2.16L15.92,6.08L14.5,7.5L13,6V11Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipMove }}
+            </span>
           </button>
 
           <!-- RESIZE -->
@@ -69,6 +108,7 @@
             :class="{
               'button-tool': true,
               'button-tool--selected': isResizeMode,
+              'tooltip': true,
             }"
             @click="
               deleteEmptyTextElement();
@@ -76,6 +116,7 @@
               isMoveMode = false;
               isDeleteMode = false;
               isDrawMode = false;
+              isSelectMode = false;
               isTextMode = false;
               isWriting = false;
               activeShape = undefined;
@@ -87,17 +128,21 @@
                 d="M23,15H21V17H23V15M23,11H21V13H23V11M23,19H21V21C22,21 23,20 23,19M15,3H13V5H15V3M23,7H21V9H23V7M21,3V5H23C23,4 22,3 21,3M3,21H11V15H1V19A2,2 0 0,0 3,21M3,7H1V9H3V7M15,19H13V21H15V19M19,3H17V5H19V3M19,19H17V21H19V19M3,3C2,3 1,4 1,5H3V3M3,11H1V13H3V11M11,3H9V5H11V3M7,3H5V5H7V3Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipResize }}
+            </span>
           </button>
 
           <!-- SEND SHAPE TO FRONT -->
           <button
             :disabled="shapes.length === 0"
-            :class="{ 'button-tool': true }"
+            :class="{ 'button-tool': true, 'tooltip': true }"
             @click="
               isResizeMode = false;
               isMoveMode = true;
               isDeleteMode = false;
               isDrawMode = false;
+              isSelectMode = false;
               isTextMode = false;
               isWriting = false;
               showCaret = false;
@@ -110,17 +155,21 @@
                 d="M2,2H11V6H9V4H4V9H6V11H2V2M22,13V22H13V18H15V20H20V15H18V13H22M8,8H16V16H8V8Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipBringToFront }}
+            </span>
           </button>
 
           <!-- SEND SHAPE TO BACK -->
           <button
             :disabled="shapes.length === 0"
-            :class="{ 'button-tool': true }"
+            :class="{ 'button-tool': true, 'tooltip': true }"
             @click="
               isResizeMode = false;
               isMoveMode = true;
               isDeleteMode = false;
               isDrawMode = false;
+              isSelectMode = false;
               isTextMode = false;
               isWriting = false;
               showCaret = false;
@@ -133,18 +182,22 @@
                 d="M2,2H11V11H2V2M9,4H4V9H9V4M22,13V22H13V13H22M15,20H20V15H15V20M16,8V11H13V8H16M11,16H8V13H11V16Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipBringToBack }}
+            </span>
           </button>
 
           <!-- COPY PASTE LAST SELECTED SHAPE -->
           <button
             :disabled="shapes.length === 0 || activeShape === 'line'"
-            :class="{ 'button-tool': true }"
+            :class="{ 'button-tool': true, 'tooltip': true }"
             @click="
               deleteEmptyTextElement();
               isResizeMode = false;
               isMoveMode = true;
               isDeleteMode = false;
               isDrawMode = false;
+              isSelectMode = false;
               isTextMode = false;
               isWriting = false;
               showCaret = false;
@@ -157,17 +210,21 @@
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipDuplicate }}
+            </span>
           </button>
 
           <!-- UNDO LAST SHAPE -->
           <button
             :disabled="shapes.length === 0"
-            :class="{ 'button-tool': true, 'button-tool--one-shot': true }"
+            :class="{ 'button-tool': true, 'button-tool--one-shot': true, 'tooltip': true }"
             @click="
               isResizeMode = false;
               isMoveMode = false;
               isDeleteMode = false;
               isDrawMode = false;
+              isSelectMode = false;
               isTextMode = false;
               isWriting = false;
               activeShape = undefined;
@@ -181,12 +238,15 @@
                 d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipUndo }}
+            </span>
           </button>
 
           <!-- PRINT -->
           <button
             v-if="showPrint"
-            :class="{ 'button-tool': true }"
+            :class="{ 'button-tool': true, 'tooltip': true }"
             @click="print"
           >
             <svg style="width: 80%;" viewBox="0 0 24 24">
@@ -195,6 +255,9 @@
                 d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
               />
             </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipPdf }}
+            </span>
           </button>
         </div>
 
@@ -205,7 +268,7 @@
               'button-tool': true,
               'button-tool--selected': activeShape === 'circle',
             }"
-            @click="setShapeTo('circle')"
+            @click="setShapeTo('circle'); isSelectMode = false;"
           >
             <svg viewBox="0 0 12 12" style="width: 100%">
               <circle
@@ -239,7 +302,7 @@
               'button-tool': true,
               'button-tool--selected': activeShape === 'rect',
             }"
-            @click="setShapeTo('rect')"
+            @click="setShapeTo('rect'); isSelectMode = false;"
           >
             <svg viewBox="0 0 12 12" style="width: 100%">
               <rect
@@ -276,7 +339,7 @@
               'button-tool': true,
               'button-tool--selected': activeShape === 'arrow',
             }"
-            @click="setShapeTo('arrow')"
+            @click="setShapeTo('arrow'); isSelectMode = false;"
           >
             <svg viewBox="0 0 24 24" style="width: 100%">
               <path
@@ -302,7 +365,7 @@
               'button-tool': true,
               'button-tool--selected': activeShape === 'line',
             }"
-            @click="setShapeTo('line')"
+            @click="setShapeTo('line'); isSelectMode = false;"
           >
             <svg viewBox="0 0 24 24" style="width: 100%">
               <path
@@ -402,6 +465,7 @@
               isDeleteMode = false;
               isMoveMode = false;
               isResizeMode = false;
+              isSelectMode = false;
               isDrawMode = false;
               activeShape = undefined;
             "
@@ -453,6 +517,7 @@
                 isMoveMode = false;
                 isResizeMode = false;
                 isDrawMode = false;
+                isSelectMode = false;
                 activeShape = undefined;
                 textAlign = 'start';
                 setSelectedTextAlignTo('start');
@@ -483,6 +548,7 @@
                 isMoveMode = false;
                 isResizeMode = false;
                 isDrawMode = false;
+                isSelectMode = false;
                 activeShape = undefined;
                 textAlign = 'middle';
                 setSelectedTextAlignTo('middle');
@@ -513,6 +579,7 @@
                 isMoveMode = false;
                 isResizeMode = false;
                 isDrawMode = false;
+                isSelectMode = false;
                 activeShape = undefined;
                 textAlign = 'end';
                 setSelectedTextAlignTo('end');
@@ -542,6 +609,7 @@
                 isMoveMode = false;
                 isResizeMode = false;
                 isDrawMode = false;
+                isSelectMode = false;
                 activeShape = undefined;
                 isBulletTextMode = !isBulletTextMode;
                 textAlign = 'start';
@@ -573,6 +641,7 @@
                 isMoveMode = false;
                 isResizeMode = false;
                 isDrawMode = false;
+                isSelectMode = false;
                 activeShape = undefined;
                 isBold = !isBold;
                 setCurrentStyleOfSelectedText();
@@ -602,6 +671,7 @@
                 isMoveMode = false;
                 isResizeMode = false;
                 isDrawMode = false;
+                isSelectMode = false;
                 activeShape = undefined;
                 isItalic = !isItalic;
                 setCurrentStyleOfSelectedText();
@@ -631,6 +701,7 @@
                 isMoveMode = false;
                 isResizeMode = false;
                 isDrawMode = false;
+                isSelectMode = false;
                 activeShape = undefined;
                 isUnderline = !isUnderline;
                 setCurrentStyleOfSelectedText();
@@ -797,17 +868,8 @@
 // TODO:
 // . visibility toggle button, showing on svg TR if shapes
 // . save to JSON emit
-// . better tools layout
 // . tutorial modal
-// . group items (save as a new <g> with a group uid; move would affect all coordinates of atomic elements. All atomic elements of a group would need to be stacked in the same order to keep layer preference of the group element; which would be pushed to the userShapes stack as a unique entity)
 // . ungroup items (remove the first <g> from the DOM)
-
-// KNOWN ISSUES:
-// .
-
-// CAVEATS
-// . slotted elements need to have a transparent background in order for the annotations to appear behind when menu is folded.
-// . while the menu is open, interactions with the slotted element are impossible, as the svg is rendered on the closest layer. This component is meant to be used for generating quick pdfs or prints.
 
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
@@ -831,6 +893,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    showTooltips: {
+      type: Boolean,
+      default: true,
+    },
     translations: {
       type: Object,
       default() {
@@ -842,6 +908,15 @@ export default {
           fontSize: "Font size",
           thickness: "Thickness",
           title: "Annotations",
+          tooltipGroup: "Select & group",
+          tooltipDelete: "Delete",
+          tooltipMove: "Move",
+          tooltipResize: "Resize",
+          tooltipBringToFront: "Bring to front",
+          tooltipBringToBack: "Bring to back",
+          tooltipDuplicate: "Duplicate",
+          tooltipUndo: "Undo last shape",
+          tooltipPdf: "Save pdf"
         };
       },
     },
@@ -874,6 +949,7 @@ export default {
       isMoveMode: false,
       isPrinting: false,
       isResizeMode: false,
+      isSelectMode: false,
       isSummaryOpen: false,
       isTextMode: false,
       isUnderline: false,
@@ -885,6 +961,7 @@ export default {
         y: 0,
       },
       preventEdit: true,
+      selectedGroup: [],
       shapes: [],
       shapesOrder: [],
       step: Math.round(Math.random) * 100000,
@@ -1032,6 +1109,9 @@ export default {
     },
   },
   computed: {
+    canSelect() {
+      return this.shapes.filter(shape => shape.type !== 'group').length > 1;
+    },
     colorTransparency() {
       return this.transparencyCodes[
         this.transparency > 98 ? 98 : this.transparency
@@ -1135,6 +1215,29 @@ export default {
 							  
 							${this.includeDeleteButton(shape)}`;
 
+          case shape && shape.type === "group":
+            return `<g id="${shape.id}">
+							  <rect
+								id="${this.isResizeMode ? "" : shape.id}"
+								x="${shape.x}"
+								y="${shape.y}"
+								fill="transparent"
+								height="${shape.rectHeight}"
+								width="${shape.rectWidth}"
+								stroke="grey"
+								stroke-width="1"
+								style="rx:1 !important; ry:1 !important; ${
+                  shape.isDash
+                    ? `stroke-dasharray: ${shape.strokeWidth * 3}`
+                    : ""
+                }; display:${this.isSelectMode || this.isDeleteMode || (this.hoveredShapeId && this.hoveredShapeId === shape.id) ? 'initial' : 'none'};"
+							  />
+                <g id="${shape.id}">
+                  ${shape.content ? shape.content : ''}
+                </g>
+							  ${this.includeDeleteButton(shape)}
+							</g> `;
+
           case shape && shape.type === "rect":
             return `<g id="${shape.id}">
 							  ${this.includeSelectionIndicator(shape)}
@@ -1214,7 +1317,7 @@ export default {
 
     this.walkTheDOM(wrapper, (node) => {
       if (!foundSvg) {
-        if (["DIV", "svg", "section"].includes(node.tagName)) {
+        if (["DIV", "svg", "section", "canvas"].includes(node.tagName)) {
           this.slottedSvg = node;
           foundSvg = true;
           return;
@@ -1323,6 +1426,8 @@ export default {
           (shape) => shape.id === e.target.id
         ).strokeWidth;
       };
+
+      this.isSelectMode = false;
 
       if (e.target.id.includes("arrow")) {
         this.activeShape = "arrow";
@@ -1660,6 +1765,336 @@ export default {
           text.textContent += e.key;
       }
     },
+    groupShapes() {
+      this.selectedGroup = [];
+
+      if(this.activeShape !== 'group') {
+        this.isSelectMode = false;
+        this.shapes = this.shapes.filter(shape => shape.type !== 'group');
+        return;
+      }
+      const group = this.shapes.at(-1);
+
+      this.shapes.forEach(shape => {
+        if(shape.type === 'group') {
+          return;
+        }
+        switch (true) {
+          case shape.type === "arrow":
+            // TLBR: top left -> bottom right
+            const isArrowTLBR = shape.x <= shape.endX && shape.y <= shape.endY &&
+              group.x <= shape.x &&
+              group.y <= shape.y &&
+              group.x + group.rectWidth >= shape.endX &&
+              group.y + group.rectHeight >= shape.endY;
+
+            // BLTR: bottom left -> top right
+            const isArrowBLTR = shape.endY < shape.y && shape.x < shape.endX &&
+              group.x <= shape.x &&
+              group.y <= shape.y &&
+              group.x + group.rectWidth >= shape.endX &&
+              group.y + group.rectHeight >= shape.y;
+
+            // TRBL: top right -> bottom left
+            const isArrowTRBL = shape.x > shape.endX && shape.y < shape.endY &&
+              group.x <= shape.endX &&
+              group.y <= shape.endY &&
+              group.x + group.rectWidth >= shape.x &&
+              group.y + group.rectHeight >= shape.endY;
+
+            // BRTL: bottom right -> top left
+            const isArrowBRTL = shape.x > shape.endX && shape.y > shape.endY &&
+              group.x <= shape.endX &&
+              group.y <= shape.endY &&
+              group.x + group.rectWidth >= shape.x &&
+              group.y + group.rectHeight >= shape.y
+
+            if(isArrowTLBR || isArrowBLTR || isArrowTRBL || isArrowBRTL){
+              this.selectedGroup.push(shape);
+            }
+            break;
+
+          case shape.type === 'circle':
+            if(
+              group.x <= shape.x + shape.circleRadius &&
+              group.y <= shape.y + shape.circleRadius &&
+              shape.x + shape.circleRadius <= group.x + group.rectWidth &&
+              shape.y + shape.circleRadius <= group.y + group.rectHeight
+            ) {
+              this.selectedGroup.push(shape);
+            }
+            break;
+
+          case shape.type === 'rect':
+            if(
+                group.x <= shape.x && 
+                group.y <= shape.y &&
+                shape.x <= group.x + group.rectWidth &&
+                shape.y <= group.y + group.rectHeight &&
+                shape.x + shape.rectWidth <= group.x + group.rectWidth &&
+                shape.y + shape.rectHeight <= group.y + group.rectHeight && 
+                shape.rectWidth <= group.rectWidth && 
+                shape.rectHeight <= group.rectHeight
+              ) {
+              this.selectedGroup.push(shape);
+            }
+            break;
+
+          case shape.type === "text":
+            if(group.x <= shape.x && group.y <= shape.y) {
+              this.selectedGroup.push(shape);
+            }
+            break;
+        
+          default:
+            break;
+        }
+        
+      });
+      
+      // add an old independant id to the selectedShape to keep track of old id
+      // replace id of selected shape with the group id
+      this.selectedGroup = this.selectedGroup.map(shape => {
+        return {
+          ...shape,
+          id: group.id,
+          oldId: shape.id,
+          diffX: shape.x - group.x,
+          diffY: shape.y - group.y,
+          diffEndX: shape.endX ? shape.endX - group.x : 0,
+          diffEndY: shape.endY ? shape.endY - group.y : 0,
+        }
+      });
+
+      group.source = this.selectedGroup;
+
+      if (this.selectedGroup.length > 1) {
+        const bannedIds = this.copy(this.selectedGroup).map(shape => {
+          return shape.oldId
+        });
+        
+        // remove selected shapes from the shapes array
+        this.shapes = this.shapes.filter(shape => !bannedIds.includes(shape.id));
+  
+        // redraw each shape in the context of the group
+        this.selectedGroup.forEach(shape => {
+          switch (true) {
+            case shape.type === 'circle':
+              group.content += `
+                <circle
+                  id="${shape.id}"
+                  cx="${shape.x}"
+                  cy="${shape.y}"
+                  r="${shape.circleRadius ? shape.circleRadius : Number.MIN_VALUE}"
+                  fill="${
+                    shape.isFilled
+                      ? shape.color + shape.alpha
+                      : "rgba(255,255,255,0.001)"
+                  }"
+                  stroke="${shape.color + shape.alpha}" 
+								  stroke-width="${shape.strokeWidth}"
+								  style="${shape.isDash ? `stroke-dasharray: ${shape.strokeWidth * 3}` : ""}"
+								  />
+              `
+              break;
+            
+            case shape.type === 'rect':
+              group.content += `
+                <rect
+                  id="${this.isResizeMode ? "" : shape.id}"
+                  x="${shape.x}"
+                  y="${shape.y}"
+                  fill="${shape.isFilled ? shape.color + shape.alpha : "rgba(255,255,255,0.001)"}"
+                  height="${shape.rectHeight}"
+                  width="${shape.rectWidth}"
+                  stroke="${shape.color + shape.alpha}"
+                  stroke-width="${shape.strokeWidth}"
+                  style="rx:1 !important; ry:1 !important; ${
+                    shape.isDash
+                      ? `stroke-dasharray: ${shape.strokeWidth * 3}`
+                      : ""
+                  }"
+							  />
+              `;
+              break;
+
+            case shape.type === "arrow":
+              const shapeWidthMax = shape.strokeWidth > 3 ? 5 : 10;
+              const shapeWidthMin = shape.strokeWidth > 3 ? 2.5 : 5;
+              const uid = Date.now();
+              group.content += `
+                <g id="${shape.id}">
+                  <defs>
+                    <marker 
+                    id="${uid}" 
+                    markerWidth="${shapeWidthMax}" 
+                    markerHeight="${shapeWidthMax}" 
+                    refX="0" 
+                    refY="${shapeWidthMin}" 
+                    orient="auto"
+                    >
+                    <polygon 
+                      points="0 0,${shapeWidthMax} ${shapeWidthMin}, 0 ${shapeWidthMax}" 
+                      fill="${shape.color}"
+                    />
+                    </marker>
+                  </defs>
+
+                  <path 
+                    style="stroke-linecap: round !important; ${
+                      shape.isDash
+                        ? `stroke-dasharray: ${shape.strokeWidth * 3}`
+                        : ""
+                    }" 
+                    stroke="${shape.color}" 
+                    id="${shape.id}" 
+                    d="M${shape.x},${shape.y} ${shape.endX},${shape.endY}" 
+                    stroke-width="${shape.strokeWidth}" 
+                    marker-end="url(#${uid})"
+                  />
+                </g>
+              `;
+              break;
+
+              case shape.type === "text":
+                const parsedText = shape.textContent.split("‎");
+                const parsedContent = [];
+                for (let i = 0; i < parsedText.length; i += 1) {
+                  parsedContent.push(`
+                  ${
+                    shape.isBulletTextMode
+                      ? `<tspan x="${shape.x - shape.fontSize}" y="${
+                          shape.y + shape.fontSize * i
+                        }" id="${shape.id}" font-size="${shape.fontSize / 2}">⬤</tspan>`
+                      : ""
+                  }
+                  <tspan id="${shape.id}" x="${shape.x}" y="${shape.y + shape.fontSize * i}">
+                    ${parsedText[i]}
+                  </tspan>`);
+                }
+                group.content += `
+                  ${this.computeTextElement(shape, parsedContent, shape.isBulletTextMode)}
+                `;
+                break;
+          
+            default:
+              break;
+          }
+        });
+      } else {
+        // no valid selection: remove selection rect
+        this.shapes = this.shapes.filter(shape => shape.id !== group.id);
+      }
+    },
+    moveGroup(group) {
+      group.content = "";
+      group.x = this.copy(this.pointerPosition.x) - group.rectWidth / 2;
+      group.y = this.copy(this.pointerPosition.y) - group.rectHeight / 2;
+
+      group.source.forEach(shape => {
+        switch (true) {
+            case shape.type === 'circle':
+              group.content += `
+                <circle
+                  id="${shape.id}"
+                  cx="${this.copy(this.pointerPosition.x) + shape.diffX - group.rectWidth / 2}"
+                  cy="${this.copy(this.pointerPosition.y) + shape.diffY - group.rectHeight / 2}"
+                  r="${shape.circleRadius ? shape.circleRadius : Number.MIN_VALUE}"
+                  fill="${
+                    shape.isFilled
+                      ? shape.color + shape.alpha
+                      : "rgba(255,255,255,0.001)"
+                  }"
+                  stroke="${shape.color + shape.alpha}" 
+								  stroke-width="${shape.strokeWidth}"
+								  style="${shape.isDash ? `stroke-dasharray: ${shape.strokeWidth * 3}` : ""}"
+								  />
+              `
+              break;
+            
+            case shape.type === 'rect':
+              group.content += `
+                <rect
+                  id="${this.isResizeMode ? "" : shape.id}"
+                  x="${this.copy(this.pointerPosition.x) + shape.diffX - group.rectWidth / 2}"
+                  y="${this.copy(this.pointerPosition.y) + shape.diffY - group.rectHeight / 2}"
+                  fill="${shape.isFilled ? shape.color + shape.alpha : "rgba(255,255,255,0.001)"}"
+                  height="${shape.rectHeight}"
+                  width="${shape.rectWidth}"
+                  stroke="${shape.color + shape.alpha}"
+                  stroke-width="${shape.strokeWidth}"
+                  style="rx:1 !important; ry:1 !important; ${
+                    shape.isDash
+                      ? `stroke-dasharray: ${shape.strokeWidth * 3}`
+                      : ""
+                  }"
+							  />
+              `;
+              break;
+
+            case shape.type === "arrow":
+              const shapeWidthMax = shape.strokeWidth > 3 ? 5 : 10;
+              const shapeWidthMin = shape.strokeWidth > 3 ? 2.5 : 5;
+              const uid = Date.now();
+              group.content += `
+                <g id="${shape.id}">
+                  <defs>
+                    <marker 
+                    id="${uid}" 
+                    markerWidth="${shapeWidthMax}" 
+                    markerHeight="${shapeWidthMax}" 
+                    refX="0" 
+                    refY="${shapeWidthMin}" 
+                    orient="auto"
+                    >
+                    <polygon 
+                      points="0 0,${shapeWidthMax} ${shapeWidthMin}, 0 ${shapeWidthMax}" 
+                      fill="${shape.color}"
+                    />
+                    </marker>
+                  </defs>
+
+                  <path 
+                    style="stroke-linecap: round !important; ${
+                      shape.isDash
+                        ? `stroke-dasharray: ${shape.strokeWidth * 3}`
+                        : ""
+                    }" 
+                    stroke="${shape.color}" 
+                    id="${shape.id}" 
+                    d="M${this.copy(this.pointerPosition.x) + shape.diffX - group.rectWidth / 2},${this.copy(this.pointerPosition.y) + shape.diffY - group.rectHeight / 2} ${this.copy(this.pointerPosition.x) + shape.diffEndX - group.rectWidth / 2},${this.copy(this.pointerPosition.y) + shape.diffEndY - group.rectHeight / 2}" 
+                    stroke-width="${shape.strokeWidth}" 
+                    marker-end="url(#${uid})"
+                  />
+                </g>
+              `;
+              break;
+
+              case shape.type === "text":
+                const parsedText = shape.textContent.split("‎");
+                const parsedContent = [];
+                for (let i = 0; i < parsedText.length; i += 1) {
+                  parsedContent.push(`
+                  ${
+                    shape.isBulletTextMode
+                      ? `<tspan x="${this.copy(this.pointerPosition.x) + shape.diffX - shape.fontSize - group.rectWidth / 2}" y="${this.copy(this.pointerPosition.y) + shape.diffY + shape.fontSize * i - group.rectHeight / 2
+                        }" id="${shape.id}" font-size="${shape.fontSize / 2}">⬤</tspan>`
+                      : ""
+                  }
+                  <tspan id="${shape.id}" x="${this.copy(this.pointerPosition.x) + shape.diffX - group.rectWidth / 2}" y="${this.copy(this.pointerPosition.y) + shape.diffY + shape.fontSize * i - group.rectHeight / 2}">
+                    ${parsedText[i]}
+                  </tspan>`);
+                }
+                group.content += `
+                  ${this.computeTextElement(shape, parsedContent, shape.isBulletTextMode)}
+                `;
+                break;
+          
+            default:
+              break;
+          }
+      });
+    },
     chooseAction(e) {
       this.isMouseDown = true;
       switch (true) {
@@ -1957,7 +2392,7 @@ export default {
             ).path += ` ${this.pointerPosition.x} ${this.pointerPosition.y} `;
             break;
 
-          case this.activeShape === "rect":
+          case ['rect', 'group'].includes(this.activeShape):
             const minRectSize = 20;
             this.shapes.at(-1).rectWidth =
               this.copy(this.currentPointer.end.x - this.shapes.at(-1).x) > 0
@@ -1975,19 +2410,21 @@ export default {
     },
     drawDown() {
       this.isDrawing = true;
-      if (!this.activeShape) {
+      if (!this.activeShape && !this.isSelectMode) {
         return;
       }
+
       if (!this.isDrawing) {
         return;
       }
+
       this.isDrawingNewShape = true;
 
       this.currentPointer.start = {
         x: this.pointerPosition.x,
         y: this.pointerPosition.y,
       };
-      let id = `${this.activeShape}_${Math.random() * 10000}_${Date.now()}`;
+      let id = `${this.isSelectMode ? 'group' : this.activeShape}_${Math.random() * 10000}_${Date.now()}`;
 
       switch (true) {
         case this.activeShape === "arrow":
@@ -2055,6 +2492,24 @@ export default {
           this.lastSelectedShape = this.shapes.at(-1);
           break;
 
+        case this.activeShape === "group":
+            this.shapes.push({
+            alpha: 1,
+            id: `group_${Math.random() * 10000}_${Date.now()}`,
+            x: this.pointerPosition.x,
+            y: this.pointerPosition.y,
+            isFilled: false,
+            rectHeight: this.copy(this.options.rect.height),
+            rectWidth: this.copy(this.options.rect.width),
+            rectStrokeWidth: 1,
+            type: "group",
+            color: "grey",
+            strokeWidth: 1,
+            isDash: true,
+            content: "",
+          });
+          break;
+
         default:
           break;
       }
@@ -2083,6 +2538,9 @@ export default {
         case shape.type === "circle":
           shape.x = this.copy(this.pointerPosition.x);
           shape.y = this.copy(this.pointerPosition.y);
+          break;
+        case shape.type === "group":
+          this.moveGroup(shape);
           break;
         case shape.type === "rect":
           shape.x = this.copy(this.pointerPosition.x - shape.rectWidth / 2);
@@ -2136,6 +2594,7 @@ export default {
       this.isResizeMode = false;
       this.isTextMode = false;
       this.isWriting = false;
+      this.isSelectMode = false;
       this.activeShape = undefined;
       this.showCaret = false;
       this.$nextTick(() => {
@@ -2213,6 +2672,9 @@ export default {
       this.isDrawing = false;
       this.isMouseDown = false;
       this.pointerDownId = -1;
+      if(this.isSelectMode) {
+        this.groupShapes();
+      }
       clearInterval(this.pointerDownId);
     },
     resize() {
@@ -2311,6 +2773,7 @@ export default {
       if (shape === this.activeShape) {
         this.activeShape = undefined;
         this.isDrawMode = false;
+
         return;
       }
       this.isDrawMode = true;
@@ -2438,6 +2901,45 @@ summary {
     opacity: 1;
     stroke-dashoffset: 0;
   }
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 
 .draw--free {

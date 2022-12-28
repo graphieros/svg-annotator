@@ -6,6 +6,7 @@ Features:
 . freehand drawing
 . add text (includes bullet points mode)
 . select, move, resize, copy paste, delete shapes
+. select and group shapes in one single action
 . save to pdf (uses html2canvas & jspdf as dependencies)
 
 ## Project setup
@@ -16,15 +17,34 @@ npm i svg-annotator
 ## Implementation
 ```
 import SvgAnnotator from "svg-annotator";
+```
 
-add in your template, wrap the element to be annotated with the SvgAnnotator.
-You need to place a single element inside (div, section, or svg), as the SvgAnnotator will base its size upon the first slotted element.
+You need to place a single element inside the SvgAnnotator (div, section, svg or canvas), as the SvgAnnotator will base its size upon the first slotted element. This element and all its children will be part of the annotation area.
 
-<!-- If your content contains multiple elements, place them inside a single div or section -->
+If your content contains multiple elements, place them inside a single div, section, svg or canvas element:
+
+```
 <SvgAnnotator>
     <div>
         ... any content you want
     </div>
+</SvgAnnotator>
+
+<SvgAnnotator>
+    <section>
+        ... any content you want
+    </section>
+</SvgAnnotator>
+
+<SvgAnnotator>
+    <svg>
+        ... any content you want
+    </svg>
+</SvgAnnotator>
+
+<SvgAnnotator>
+    <canvas>
+    </canvas>
 </SvgAnnotator>
 
 ```
@@ -53,6 +73,11 @@ You need to place a single element inside (div, section, or svg), as the SvgAnno
       type: Boolean,
       default: false,
     },
+    showTooltips: {
+      // Show tooltips for top buttons of toolbox
+      type: Boolean,
+      default: true,
+    },
     translations: {
       // Translations for all labels used in the toolbox
       type: Object,
@@ -65,6 +90,15 @@ You need to place a single element inside (div, section, or svg), as the SvgAnno
           fontSize: "Font size",
           thickness: "Thickness",
           title: "Annotations",
+          tooltipGroup: "Select & group",
+          tooltipDelete: "Delete",
+          tooltipMove: "Move",
+          tooltipResize: "Resize",
+          tooltipBringToFront: "Bring to front",
+          tooltipBringToBack: "Bring to back",
+          tooltipDuplicate: "Duplicate",
+          tooltipUndo: "Undo last shape",
+          tooltipPdf: "Save pdf"
         };
       },
     },
