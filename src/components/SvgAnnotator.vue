@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="`font-family:${fontFamily}`">
     <div data-html2canvas-ignore>
       <details
         @toggle="toggleSummary"
@@ -104,7 +104,7 @@
 
           <!-- RESIZE -->
           <button
-            :disabled="shapes.length === 0 || activeShape === 'line'"
+            :disabled="shapes.length === 0 || ['line', 'group'].includes(activeShape)"
             :class="{
               'button-tool': true,
               'button-tool--selected': isResizeMode,
@@ -233,13 +233,35 @@
             "
           >
             <svg style="width: 80%;" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
-              />
+              <path fill="currentColor" d="M12.5,8C9.85,8 7.45,9 5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22 10.54,10.5 12.5,10.5C16.04,10.5 19.05,12.81 20.1,16L22.47,15.22C21.08,11.03 17.15,8 12.5,8Z" />
             </svg>
             <span v-if="showTooltips" class="tooltiptext">
               {{ translations.tooltipUndo }}
+            </span>
+          </button>
+
+          <!-- REDO LAST SHAPE -->
+          <button
+            :disabled="undoStack.length === 0"
+            :class="{ 'button-tool': true, 'button-tool--one-shot': true, 'tooltip': true }"
+            @click="
+              isResizeMode = false;
+              isMoveMode = false;
+              isDeleteMode = false;
+              isDrawMode = false;
+              isSelectMode = false;
+              isTextMode = false;
+              isWriting = false;
+              activeShape = undefined;
+              showCaret = false;
+              redoLastShape();
+            "
+          >
+            <svg style="width: 80%;" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M18.4,10.6C16.55,9 14.15,8 11.5,8C6.85,8 2.92,11.03 1.54,15.22L3.9,16C4.95,12.81 7.95,10.5 11.5,10.5C13.45,10.5 15.23,11.22 16.62,12.38L13,16H22V7L18.4,10.6Z" />
+            </svg>
+            <span v-if="showTooltips" class="tooltiptext">
+              {{ translations.tooltipRedo }}
             </span>
           </button>
 
@@ -870,6 +892,7 @@
 // . save to JSON emit
 // . tutorial modal
 // . ungroup items (remove the first <g> from the DOM)
+// . redo (add a temp stack that gets filled with all deleted or undo items)
 
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
@@ -915,6 +938,7 @@ export default {
           tooltipBringToFront: "Bring to front",
           tooltipBringToBack: "Bring to back",
           tooltipDuplicate: "Duplicate",
+          tooltipRedo: "Redo last shape",
           tooltipUndo: "Undo last shape",
           tooltipPdf: "Save pdf"
         };
@@ -964,7 +988,7 @@ export default {
       selectedGroup: [],
       shapes: [],
       shapesOrder: [],
-      step: Math.round(Math.random) * 100000,
+      step: Math.round(Math.random()) * 100000,
       svgHeight: 1000,
       svgWidth: 1000,
       options: {
@@ -1097,6 +1121,7 @@ export default {
         "FF",
         "FF",
       ],
+      undoStack: [],
     };
   },
   watch: {
@@ -1681,9 +1706,22 @@ export default {
       }
       this.lastSelectedShape.textAlign = position;
     },
+    redoLastShape() {
+      if(this.undoStack.length === 0) {
+        return;
+      }
+      this.shapes.push(this.undoStack.at(-1));
+      this.undoStack = this.undoStack.slice(0, -1);
+      this.lastSelectedShape = this.shapes.at(-1);
+    },
     undoLastShape() {
-      this.lastSelectedShape = undefined;
+      this.undoStack.push(this.lastSelectedShape);
       this.shapes = this.shapes.slice(0, -1);
+      if (this.shapes.length > 0) {
+        this.lastSelectedShape = this.shapes.at(-1);
+      } else {
+        this.lastSelectedShape = undefined;
+      } 
     },
     write(e) {
       if (this.preventEdit) {
@@ -2309,10 +2347,15 @@ export default {
       const shapeId = e.target.id;
       switch (true) {
         case this.isDeleteMode:
+          this.undoStack.push(this.shapes.find(shape => shape.id === shapeId));
           this.shapes = [...this.shapes].filter(
             (shape) => shape.id !== shapeId
           );
-          this.lastSelectedShape = undefined;
+          if (this.shapes.length > 0) {
+            this.lastSelectedShape = this.shapes.at(-1);
+          } else {
+            this.lastSelectedShape = undefined;
+          }
           break;
 
         default:
@@ -2653,7 +2696,7 @@ export default {
               }
             }
             pdf.save(
-              `${new Date().toLocaleDateString()}_ConsumerLive_annotations.pdf`
+              `${new Date().toLocaleDateString()}_annotations.pdf`
             );
           })
           .finally(() => {
@@ -2810,13 +2853,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+summary {
+  text-align:center;
+  padding: 0 0 6px 0;
+}
 .hide-shape {
   display: none;
 }
 button.button-tool {
   align-items:center;
   background: white;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 1px solid #ccc;
   border: 1px solid grey;
   cursor: pointer !important;

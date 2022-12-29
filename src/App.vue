@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SvgAnnotator>
+    <SvgAnnotator showPrint>
       <slot></slot>
     </SvgAnnotator> 
   </div>
