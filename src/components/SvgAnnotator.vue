@@ -1454,6 +1454,10 @@ export default {
 
       this.isSelectMode = false;
 
+      if(e.target.nodeName === "svg") {
+        this.isMoveMode = false;
+      }
+
       if (e.target.id.includes("arrow")) {
         this.activeShape = "arrow";
         setIsDashState();
