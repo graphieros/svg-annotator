@@ -46,8 +46,9 @@
             :disabled="shapes.length === 0"
             :class="{
               'button-tool': true,
-              'button-tool--selected': isDeleteMode,
-              'tooltip': true
+              'button--delete--selected': isDeleteMode && shapes.length > 0,
+              'tooltip': true,
+              'button--delete': true
             }"
             @click="
               deleteEmptyTextElement();
@@ -218,7 +219,7 @@
           <!-- UNDO LAST SHAPE -->
           <button
             :disabled="shapes.length === 0"
-            :class="{ 'button-tool': true, 'button-tool--one-shot': true, 'tooltip': true }"
+            :class="{ 'button-tool': true, 'button-tool--one-shot': true, 'tooltip': true, 'button--round': true }"
             @click="
               isResizeMode = false;
               isMoveMode = false;
@@ -243,7 +244,7 @@
           <!-- REDO LAST SHAPE -->
           <button
             :disabled="undoStack.length === 0"
-            :class="{ 'button-tool': true, 'button-tool--one-shot': true, 'tooltip': true }"
+            :class="{ 'button-tool': true, 'button-tool--one-shot': true, 'tooltip': true, 'button--round': true }"
             @click="
               isResizeMode = false;
               isMoveMode = false;
@@ -2906,6 +2907,20 @@ button.button-tool {
 button.button-tool:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+button.button--round {
+  border-radius: 50% !important;
+}
+button.button--delete {
+  &--selected {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid red;
+    svg {
+      path {
+        fill: red;
+      }
+    }
+  }
 }
 .tool-selection {
   display: flex;
