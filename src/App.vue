@@ -7,6 +7,8 @@
       <b>
         On-the-go client side content annotation & pdf generation
       </b>
+       <br>
+        (not suited for touchscreen only devices)
     </p>
       <code>npm i svg-annotator</code>
     <nav class="menu menu__wrapper">
@@ -167,6 +169,27 @@
       <tr>
         <td>
           <code>
+            disableForTouchScreens
+          </code>
+        </td>
+        <td>
+          <span class="green">
+            Boolean
+          </span>
+        </td>
+        <td>
+          <span class="blue">
+            true
+          </span>
+        </td>
+        <td>
+           In its current version, <b style="color: rgb(200,100,100);">SvgAnnotator is not suited for touchscreen devices</b>, and best used with a mouse & keyboard. This prop hides the toolbar for touchscreen devices, basically deactivating the annotator.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <code>
         fixedTools
           </code>
         </td>
@@ -240,11 +263,11 @@
         </td>
         <td>
           <span class="blue">
-            false
+            true
           </span>
         </td>
         <td>
-           Set to true to show the print button in the toolbar and allow pdf generation.
+           Set to false to hide the print button in the toolbar and remove pdf generation capability.
         </td>
       </tr>
 
