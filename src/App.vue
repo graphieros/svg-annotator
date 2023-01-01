@@ -61,6 +61,27 @@
         Add the component to the list of components:
         <code>
           components: { SvgAnnotator },
+        </code><br>
+        <b>Important: you should only slot one element inside the SvgAnnotator:</b>
+        <br><br>
+        ✔ Correct implementation:
+        <br>
+        <code>
+          &#x3c;SvgAnnotator&#x3e;<br>
+          &nbsp;&nbsp;&#x3c;div&#x3e;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
+          &nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+          &#x3c;/SvgAnnotator&#x3e;
+        </code>
+        <br><br>
+        ❌ Wrong implementation:
+        <br>
+        <code>
+          &#x3c;SvgAnnotator&#x3e;<br>
+          &nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
+          &nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
+          &#x3c;/SvgAnnotator&#x3e;
         </code>
       </p>
     </section>
