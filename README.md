@@ -13,6 +13,8 @@ Features:
 ```
 npm i svg-annotator
 ```
+## Documentation
+[Official documentation](https://svg-annotator.graphieros.com/)
 
 ## Implementation
 ```
