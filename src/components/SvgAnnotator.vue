@@ -1,6 +1,6 @@
 <template>
   <div :style="`font-family:${fontFamily}`">
-    <div data-html2canvas-ignore>
+    <div data-html2canvas-ignore v-if="!isTouchScreen">
       <details
         @toggle="toggleSummary"
         :style="`${
@@ -805,18 +805,6 @@
         :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
         :width="sourceWidth"
         :height="sourceHeight"
-        @pointerdown="chooseAction($event)"
-        @pointerup="resetDraw"
-        @pointermove="
-          setPointer($event);
-          chooseMove($event);
-        "
-        @pointerout="
-          preventEdit = true;
-          hoveredShapeId = undefined;
-        "
-        @pointerover="allowEditAndHoverShapes($event)"
-        @click="clickSvg($event)"
         style="position: absolute; top: 0; left: 0"
       >
         <g
@@ -824,10 +812,6 @@
           :key="`shape_${i}`"
           :id="shape.id"
           v-html="shape"
-          @click="
-            clickShape($event);
-            isMoveMode = false;
-          "
         ></g>
       </svg>
       <slot></slot>
@@ -901,6 +885,10 @@ import JsPDF from "jspdf";
 export default {
   name: "SvgAnnotator",
   props: {
+    disableForTouchScreens: {
+      type: Boolean,
+      default: true,
+    },
     fixedTools: {
       type: Boolean,
       default: false,
@@ -915,7 +903,7 @@ export default {
     },
     showPrint: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     showTooltips: {
       type: Boolean,
@@ -977,6 +965,7 @@ export default {
       isSelectMode: false,
       isSummaryOpen: false,
       isTextMode: false,
+      isTouchScreen: false,
       isUnderline: false,
       isWriting: false,
       lastSelectedShape: undefined,
@@ -1373,6 +1362,10 @@ export default {
     window.addEventListener("keydown", (e) => {
       this.write(e);
     });
+
+    this.isTouchScreen = (function IIFE () {
+      return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)
+    })() && this.disableForTouchScreens;
   },
   destroyed() {
     window.removeEventListener("keydown", (e) => {

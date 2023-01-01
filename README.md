@@ -53,6 +53,11 @@ If your content contains multiple elements, place them inside a single div, sect
 
 ## Props
 ```
+   disableForTouchScreens: {
+      //In its current version, SvgAnnotator is not suited for touchscreen devices, and best used with a mouse & keyboard. This prop hides the toolbar for touchscreen devices, basically deactivating the annotator
+      type: Boolean,
+      default: true,
+   },
    fixedTools: {
       // if true, toolbox will be fixed to top center of your page. 
       // Ideal to use when a whole page is slotted inside the SvgAnnotator.
@@ -71,9 +76,9 @@ If your content contains multiple elements, place them inside a single div, sect
       default: false,
     },
     showPrint: {
-      // Show the print button in the toolbox
+      // Show or hide the print button in the toolbox
       type: Boolean,
-      default: false,
+      default: true,
     },
     showTooltips: {
       // Show tooltips for top buttons of toolbox
