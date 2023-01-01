@@ -40,6 +40,9 @@
     </nav>
     <SvgAnnotator showPrint>
       <div style="width: 100%; height: 500px; background: rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center; color: rgba(0,0,0,0.3); font-size:1rem;">
+        <p v-if="isTouchScreen" style="padding: 0 48px; color: rgb(200,100,100)">
+          SvgAnnotator is disabled by default on touchscreens.
+        </p>
         <p style="padding: 0 48px;">
           This grey area represents the content slotted inside the SvgAnnotator. In this case it's a simple DIV containing this text, but it can be an image, a chart, a whole page...
         </p>
@@ -389,6 +392,16 @@ export default {
   name: 'App',
   components: {
     SvgAnnotator
+  },
+  data() {
+    return {
+      isTouchScreen: false,
+    }
+  },
+  mounted() {
+    this.isTouchScreen = (function IIFE () {
+      return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)
+    })()
   }
 }
 </script>
