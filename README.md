@@ -53,6 +53,11 @@ If your content contains multiple elements, place them inside a single div, sect
 
 ## Props
 ```
+   buttonSize: {
+      // the toolbar buttons size
+      type: Number,
+      default: 28,
+   },
    disableForTouchScreens: {
       //In its current version, SvgAnnotator is not suited for touchscreen devices, and best used with a mouse & keyboard. This prop hides the toolbar for touchscreen devices, basically deactivating the annotator
       type: Boolean,
