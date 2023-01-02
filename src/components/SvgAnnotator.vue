@@ -1334,7 +1334,7 @@ export default {
 
     this.walkTheDOM(wrapper, (node) => {
       if (!foundSvg) {
-        if (["DIV", "svg", "section", "canvas"].includes(node.tagName)) {
+        if (["DIV", "svg", "section", "canvas", "img"].includes(node.tagName)) {
           this.slottedSvg = node;
           foundSvg = true;
           return;
@@ -2654,7 +2654,7 @@ export default {
           }
         });
 
-        html2canvas(wrapper)
+        html2canvas(wrapper, { useCORS: true })
           .then((canvas) => {
             const contentWidth = canvas.width;
             const contentHeight = canvas.height;

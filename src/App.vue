@@ -50,6 +50,14 @@
       </div>
     </SvgAnnotator>
 
+    <p>
+      This is an example where an image is slotted:
+    </p>
+
+    <SvgAnnotator showPrint>
+      <img src="./assets/shore.jpg" style="width:100%">
+    </SvgAnnotator>
+
     <section id="setup">
       <h2>Setup</h2>
       <code>npm i svg-annotator</code>
