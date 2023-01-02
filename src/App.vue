@@ -60,8 +60,8 @@
 
     <section id="setup">
       <h2>Setup</h2>
-      <code>npm i svg-annotator</code>
-      <p>
+      <code>npm i svg-annotator</code><br>
+      <div>
         Then import the component in your .vue files: <br>
         <code>
           import svgAnnotator from "svg-annotator";
@@ -72,16 +72,42 @@
         </code><br>
         <b>Important: you should only slot one element inside the SvgAnnotator:</b>
         <br><br>
-        ✔ Correct implementation:
-        <br>
-        <code>
-          &#x3c;SvgAnnotator&#x3e;<br>
-          &nbsp;&nbsp;&#x3c;div&#x3e;<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
-          &nbsp;&nbsp;&#x3c;/div&#x3e;<br>
-          &#x3c;/SvgAnnotator&#x3e;
-        </code>
+        ✔ Correct implementations:
+        <br><br>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap">
+          <code>
+            &#x3c;SvgAnnotator&#x3e;<br>
+            &nbsp;&nbsp;&#x3c;img&#x3e;<br>
+            &#x3c;/SvgAnnotator&#x3e;
+          </code>
+          <code>
+            &#x3c;SvgAnnotator&#x3e;<br>
+            &nbsp;&nbsp;&#x3c;canvas&#x3e;<br>
+            &nbsp;&nbsp;&#x3c;/canvas&#x3e;<br>
+            &#x3c;/SvgAnnotator&#x3e;
+          </code>
+          <code>
+            &#x3c;SvgAnnotator&#x3e;<br>
+            &nbsp;&nbsp;&#x3c;div&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
+            &nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+            &#x3c;/SvgAnnotator&#x3e;
+          </code>
+          <code>
+            &#x3c;SvgAnnotator&#x3e;<br>
+            &nbsp;&nbsp;&#x3c;section&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;div&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;div&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+            &nbsp;&nbsp;&#x3c;/section&#x3e;<br>
+            &#x3c;/SvgAnnotator&#x3e;
+          </code>
+        </div>
+        
         <br><br>
         ❌ Wrong implementation:
         <br>
@@ -91,7 +117,7 @@
           &nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
           &#x3c;/SvgAnnotator&#x3e;
         </code>
-      </p>
+      </div>
     </section>
 
     <section id="functionalities">
@@ -196,6 +222,27 @@
         <th>Type</th>
         <th>Default</th>
         <th>Description</th>
+      </tr>
+
+      <tr>
+        <td>
+          <code>
+            buttonSize
+          </code>
+        </td>
+        <td>
+          <span class="green">
+            Number
+          </span>
+        </td>
+        <td>
+          <span class="dirtyGreen">
+            28
+          </span>
+        </td>
+        <td>
+           Adjust the size of the toolbar buttons.
+        </td>
       </tr>
 
       <tr>
@@ -479,12 +526,16 @@ footer {
 }
 .blue,
 .green,
-.orange {
+.orange,
+.dirtyGreen {
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
 }
 .blue {
   color: rgb(12, 53, 100);
+}
+.dirtyGreen {
+  color: rgb(91, 150, 44);
 }
 .green {
   color: green;
