@@ -5,7 +5,7 @@ Features:
 . create shapes (rectangle, circle, arrow)
 . freehand drawing
 . add text (includes bullet points mode)
-. select, move, resize, copy paste, delete, redo shapes
+. select, move, resize, copy paste, delete, group & ungroup, redo shapes
 . select and group shapes in one single action
 . save to pdf (uses html2canvas & jspdf as dependencies)
 
@@ -80,6 +80,11 @@ If your content contains multiple elements, place them inside a single div, sect
       type: Boolean,
       default: false,
     },
+    iconColor: {
+      // Color of the button icons & borders
+      type: String,
+      default: "#4a4a4a",
+    },
     showPrint: {
       // Show or hide the print button in the toolbox
       type: Boolean,
@@ -111,6 +116,7 @@ If your content contains multiple elements, place them inside a single div, sect
           tooltipDuplicate: "Duplicate",
           tooltipRedo: "Redo last shape",
           tooltipUndo: "Undo last shape",
+          tooltipUngroup: "Ungroup",
           tooltipPdf: "Save pdf"
         };
       },
