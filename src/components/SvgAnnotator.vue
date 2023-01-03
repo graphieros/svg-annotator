@@ -11,14 +11,14 @@
       >
         <summary>{{ translations.title }}</summary>
 
-        <div class="tool-selection tool-selection--top">
+        <div class="svg-annotator__tool-selection svg-annotator__tool-selection--top">
           <!-- SELECT -->
           <button
             :disabled="!canSelect"
             :class="{
-              'button-tool': true,
-              'button-tool--selected': isSelectMode,
-              'tooltip-svg': true,
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': isSelectMode,
+              'svg-annotator__tooltip-svg': true,
             }"
             @click="
               deleteEmptyTextElement();
@@ -40,7 +40,7 @@
                 d="M1,1V5H2V19H1V23H5V22H19V23H23V19H22V5H23V1H19V2H5V1M5,4H19V5H20V19H19V20H5V19H4V5H5M6,6V14H9V18H18V9H14V6M8,8H12V12H8M14,11H16V16H11V14H14"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipGroup }}
             </span>
           </button>
@@ -49,10 +49,10 @@
           <button
             :disabled="shapes.length === 0"
             :class="{
-              'button-tool': true,
-              'button--delete--selected': isDeleteMode && shapes.length > 0,
-              'tooltip-svg': true,
-              'button--delete': true,
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button--delete--selected': isDeleteMode && shapes.length > 0,
+              'svg-annotator__tooltip-svg': true,
+              'svg-annotator__button--delete': true,
             }"
             @click="
               deleteEmptyTextElement();
@@ -72,7 +72,7 @@
                 d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipDelete }}
             </span>
           </button>
@@ -81,9 +81,9 @@
           <button
             :disabled="shapes.length === 0"
             :class="{
-              'button-tool': true,
-              'button-tool--selected': isMoveMode,
-              'tooltip-svg': true,
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': isMoveMode,
+              'svg-annotator__tooltip-svg': true,
             }"
             @click="
               deleteEmptyTextElement();
@@ -104,7 +104,7 @@
                 d="M13,11H18L16.5,9.5L17.92,8.08L21.84,12L17.92,15.92L16.5,14.5L18,13H13V18L14.5,16.5L15.92,17.92L12,21.84L8.08,17.92L9.5,16.5L11,18V13H6L7.5,14.5L6.08,15.92L2.16,12L6.08,8.08L7.5,9.5L6,11H11V6L9.5,7.5L8.08,6.08L12,2.16L15.92,6.08L14.5,7.5L13,6V11Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipMove }}
             </span>
           </button>
@@ -113,9 +113,9 @@
           <button
             :disabled="shapes.length === 0 || ['line', 'group'].includes(activeShape)"
             :class="{
-              'button-tool': true,
-              'button-tool--selected': isResizeMode,
-              'tooltip-svg': true,
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': isResizeMode,
+              'svg-annotator__tooltip-svg': true,
             }"
             @click="
               deleteEmptyTextElement();
@@ -136,7 +136,7 @@
                 d="M23,15H21V17H23V15M23,11H21V13H23V11M23,19H21V21C22,21 23,20 23,19M15,3H13V5H15V3M23,7H21V9H23V7M21,3V5H23C23,4 22,3 21,3M3,21H11V15H1V19A2,2 0 0,0 3,21M3,7H1V9H3V7M15,19H13V21H15V19M19,3H17V5H19V3M19,19H17V21H19V19M3,3C2,3 1,4 1,5H3V3M3,11H1V13H3V11M11,3H9V5H11V3M7,3H5V5H7V3Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipResize }}
             </span>
           </button>
@@ -144,7 +144,7 @@
           <!-- SEND SHAPE TO FRONT -->
           <button
             :disabled="shapes.length === 0"
-            :class="{ 'button-tool': true, 'tooltip-svg': true }"
+            :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
             @click="
               isResizeMode = false;
               isMoveMode = true;
@@ -164,7 +164,7 @@
                 d="M2,2H11V6H9V4H4V9H6V11H2V2M22,13V22H13V18H15V20H20V15H18V13H22M8,8H16V16H8V8Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipBringToFront }}
             </span>
           </button>
@@ -172,7 +172,7 @@
           <!-- SEND SHAPE TO BACK -->
           <button
             :disabled="shapes.length === 0"
-            :class="{ 'button-tool': true, 'tooltip-svg': true }"
+            :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
             @click="
               isResizeMode = false;
               isMoveMode = true;
@@ -192,7 +192,7 @@
                 d="M2,2H11V11H2V2M9,4H4V9H9V4M22,13V22H13V13H22M15,20H20V15H15V20M16,8V11H13V8H16M11,16H8V13H11V16Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipBringToBack }}
             </span>
           </button>
@@ -200,7 +200,7 @@
           <!-- COPY PASTE LAST SELECTED SHAPE -->
           <button
             :disabled="shapes.length === 0 || activeShape === 'line'"
-            :class="{ 'button-tool': true, 'tooltip-svg': true }"
+            :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
             @click="
               deleteEmptyTextElement();
               isResizeMode = false;
@@ -221,7 +221,7 @@
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipDuplicate }}
             </span>
           </button>
@@ -230,10 +230,10 @@
           <button
             :disabled="shapes.length === 0"
             :class="{
-              'button-tool': true,
-              'button-tool--one-shot': true,
-              'tooltip-svg': true,
-              'button--round': true,
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--one-shot': true,
+              'svg-annotator__tooltip-svg': true,
+              'svg-annotator__button--round': true,
             }"
             @click="
               isResizeMode = false;
@@ -255,7 +255,7 @@
                 d="M12.5,8C9.85,8 7.45,9 5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22 10.54,10.5 12.5,10.5C16.04,10.5 19.05,12.81 20.1,16L22.47,15.22C21.08,11.03 17.15,8 12.5,8Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipUndo }}
             </span>
           </button>
@@ -264,10 +264,10 @@
           <button
             :disabled="undoStack.length === 0"
             :class="{
-              'button-tool': true,
-              'button-tool--one-shot': true,
-              'tooltip-svg': true,
-              'button--round': true,
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--one-shot': true,
+              'svg-annotator__tooltip-svg': true,
+              'svg-annotator__button--round': true,
             }"
             @click="
               isResizeMode = false;
@@ -289,7 +289,7 @@
                 d="M18.4,10.6C16.55,9 14.15,8 11.5,8C6.85,8 2.92,11.03 1.54,15.22L3.9,16C4.95,12.81 7.95,10.5 11.5,10.5C13.45,10.5 15.23,11.22 16.62,12.38L13,16H22V7L18.4,10.6Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipRedo }}
             </span>
           </button>
@@ -297,7 +297,7 @@
           <!-- PRINT -->
           <button
             v-if="showPrint"
-            :class="{ 'button-tool': true, 'tooltip-svg': true }"
+            :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
             @click="print"
             :style="`height:${buttonSize}px; width:${buttonSize}px;`"
           >
@@ -307,18 +307,18 @@
                 d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
               />
             </svg>
-            <span v-if="showTooltips" class="tooltiptext">
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
               {{ translations.tooltipPdf }}
             </span>
           </button>
         </div>
 
         <!-- SET SHAPE TO CIRCLE -->
-        <div class="tool-selection tool-selection--bottom">
+        <div class="svg-annotator__tool-selection svg-annotator__tool-selection--bottom">
           <button
             :class="{
-              'button-tool': true,
-              'button-tool--selected': activeShape === 'circle',
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': activeShape === 'circle',
             }"
             @click="
               setShapeTo('circle');
@@ -342,7 +342,7 @@
               ></circle>
             </svg>
           </button>
-          <div class="tool-input" v-if="activeShape === 'circle'">
+          <div class="svg-annotator__tool-input" v-if="activeShape === 'circle'">
             <label for="circleFill">{{ translations.filled }}</label>
             <input
               type="checkbox"
@@ -355,8 +355,8 @@
           <!-- SET SHAPE TO RECT -->
           <button
             :class="{
-              'button-tool': true,
-              'button-tool--selected': activeShape === 'rect',
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': activeShape === 'rect',
             }"
             @click="
               setShapeTo('rect');
@@ -382,7 +382,7 @@
               />
             </svg>
           </button>
-          <div class="tool-input" v-if="activeShape === 'rect'">
+          <div class="svg-annotator__tool-input" v-if="activeShape === 'rect'">
             <label for="rectFill">{{ translations.filled }}</label>
             <input
               id="rectFill"
@@ -396,8 +396,8 @@
           <!-- SET SHAPE TO ARRROW -->
           <button
             :class="{
-              'button-tool': true,
-              'button-tool--selected': activeShape === 'arrow',
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': activeShape === 'arrow',
             }"
             @click="
               setShapeTo('arrow');
@@ -426,8 +426,8 @@
           <!-- SET SHAPE TO FREEHAND LINE -->
           <button
             :class="{
-              'button-tool': true,
-              'button-tool--selected': activeShape === 'line',
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': activeShape === 'line',
             }"
             @click="
               setShapeTo('line');
@@ -524,8 +524,8 @@
           <!-- SET SHAPE TO TEXT -->
           <button
             :class="{
-              'button-tool': true,
-              'button-tool--selected': isTextMode,
+              'svg-annotator__button-tool': true,
+              'svg-annotator__button-tool--selected': isTextMode,
             }"
             @click="
               deleteEmptyTextElement();
@@ -578,8 +578,8 @@
           <div v-if="isTextMode">
             <button
               :class="{
-                'button-tool': true,
-                'button-tool--selected': textAlign === 'start',
+                'svg-annotator__button-tool': true,
+                'svg-annotator__button-tool--selected': textAlign === 'start',
               }"
               @click="
                 isDeleteMode = false;
@@ -606,8 +606,8 @@
           <div v-if="isTextMode">
             <button
               :class="{
-                'button-tool': true,
-                'button-tool--selected': textAlign === 'middle',
+                'svg-annotator__button-tool': true,
+                'svg-annotator__button-tool--selected': textAlign === 'middle',
               }"
               :disabled="isBulletTextMode"
               @click="
@@ -635,8 +635,8 @@
           <div v-if="isTextMode">
             <button
               :class="{
-                'button-tool': true,
-                'button-tool--selected': textAlign === 'end',
+                'svg-annotator__button-tool': true,
+                'svg-annotator__button-tool--selected': textAlign === 'end',
               }"
               :disabled="isBulletTextMode"
               @click="
@@ -664,8 +664,8 @@
           <div v-if="isTextMode">
             <button
               :class="{
-                'button-tool': true,
-                'button-tool--selected': isBulletTextMode,
+                'svg-annotator__button-tool': true,
+                'svg-annotator__button-tool--selected': isBulletTextMode,
               }"
               @click="
                 isDeleteMode = false;
@@ -694,8 +694,8 @@
           <div v-if="isTextMode">
             <button
               :class="{
-                'button-tool': true,
-                'button-tool--selected': isBold,
+                'svg-annotator__button-tool': true,
+                'svg-annotator__button-tool--selected': isBold,
               }"
               @click="
                 isDeleteMode = false;
@@ -722,8 +722,8 @@
           <div v-if="isTextMode">
             <button
               :class="{
-                'button-tool': true,
-                'button-tool--selected': isItalic,
+                'svg-annotator__button-tool': true,
+                'svg-annotator__button-tool--selected': isItalic,
               }"
               @click="
                 isDeleteMode = false;
@@ -750,8 +750,8 @@
           <div v-if="isTextMode">
             <button
               :class="{
-                'button-tool': true,
-                'button-tool--selected': isUnderline,
+                'svg-annotator__button-tool': true,
+                'svg-annotator__button-tool--selected': isUnderline,
               }"
               @click="
                 isDeleteMode = false;
@@ -914,7 +914,7 @@
 // . save to JSON emit
 // . tutorial modal
 // . ungroup items (remove the first <g> from the DOM)
-// . redo (add a temp stack that gets filled with all deleted or undo items)
+
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 export default {
@@ -2616,7 +2616,7 @@ export default {
           ) {
             node.setAttribute("font-family", "Helvetica");
             node.style.setProperty("font-family", "Helvetica", "important");
-            node.classList.add("no-shadow");
+            node.classList.add("svg-annotator__no-shadow");
             node.replaceWith(node);
           }
         });
@@ -2664,7 +2664,7 @@ export default {
               ) {
                 node.setAttribute("font-family", this.fontFamily);
                 node.style.setProperty("font-family", this.fontFamily, "important");
-                node.classList.remove("no-shadow");
+                node.classList.remove("svg-annotator__no-shadow");
                 node.replaceWith(node);
               }
             });
@@ -2782,7 +2782,7 @@ export default {
         this.isDeleteMode = false;
         this.isWriting = false;
       }
-      this.$emit("toggleOpenState", { isOpen: this.isSummaryOpen });
+      this.$emit("toggleOpenState", this.isSummaryOpen);
     },
     walkTheDOM(node, func) {
       func(node);
@@ -2804,7 +2804,7 @@ summary {
 .hide-shape {
   display: none;
 }
-button.button-tool {
+button.svg-annotator__button-tool {
   align-items: center;
   background: white;
   border-radius: 4px;
@@ -2841,14 +2841,14 @@ button.button-tool {
     }
   }
 }
-button.button-tool:disabled {
+button.svg-annotator__button-tool:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
-button.button--round {
+button.svg-annotator__button--round {
   border-radius: 50% !important;
 }
-button.button--delete {
+button.svg-annotator__button--delete {
   &--selected {
     background: rgba(255, 0, 0, 0.1);
     border: 1px solid red;
@@ -2859,7 +2859,7 @@ button.button--delete {
     }
   }
 }
-.tool-selection {
+.svg-annotator__tool-selection {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -2874,7 +2874,7 @@ button.button--delete {
     border-radius: 8px 8px 0 0;
   }
 }
-.tool-input {
+.svg-annotator__tool-input {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2911,12 +2911,12 @@ summary {
     stroke-dashoffset: 0;
   }
 }
-.tooltip-svg {
+.svg-annotator__tooltip-svg {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
 }
-.tooltip-svg .tooltiptext {
+.svg-annotator__tooltip-svg .svg-annotator__tooltiptext {
   visibility: hidden;
   width: 120px;
   background-color: #555;
@@ -2932,7 +2932,7 @@ summary {
   opacity: 0;
   transition: opacity 0.3s;
 }
-.tooltip-svg .tooltiptext::after {
+.svg-annotator__tooltip-svg .svg-annotator__tooltiptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -2942,7 +2942,7 @@ summary {
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-.tooltip-svg:hover .tooltiptext {
+.svg-annotator__tooltip-svg:hover .svg-annotator__tooltiptext {
   visibility: visible;
   opacity: 1;
 }
@@ -2952,7 +2952,7 @@ summary {
       5 5,
     auto;
 }
-.no-shadow {
+.svg-annotator__no-shadow {
   * {
     box-shadow: none !important;
   }

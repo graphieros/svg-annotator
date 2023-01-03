@@ -28,6 +28,11 @@
         </a>
       </div>
       <div class="menu menu__item">
+        <a href="#events">
+          Events
+        </a>
+      </div>
+      <div class="menu menu__item">
         <a href="#caveats">
           Caveats
         </a>
@@ -53,8 +58,11 @@
     <p>
       This is an example where an image is slotted:
     </p>
-
-    <SvgAnnotator showPrint>
+    <p style="text-align:center;">
+      An event is triggered to signal the open | closed state of the toolbar.<br>
+      The toolbar is <b>{{ isOpen ? 'open' : 'closed' }}</b>.
+    </p>
+    <SvgAnnotator showPrint @toggleOpenState="toggleAnnotator">
       <img src="./assets/shore.jpg" style="width:100%">
     </SvgAnnotator>
 
@@ -412,20 +420,49 @@
         </td>
       </tr>
     </table>
-    <!-- <div class="properties properties__item">
-      <code>
-        fixedTools
-      </code>
-      <div>
-        type: <span class="green">Boolean</span>,
-        <br>
-        default: <span class="blue">false</span>
-      </div>
-      <div>
-        Set to false by default, the toolbar will be relative to the component. If set to true, the toolbar will become fixed and positioned on the top center of your page. This is an ideal scenario if the svg-annotator wraps a whole page, in order to avoid having to scroll back to use the toolbar.
-      </div>
-    </div> -->
+    </section>
 
+    <section id="events">
+      <h2>Events</h2>
+      <table>
+        <tr>
+          <th>Event</th>
+          <th>Returns</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>
+            <code>
+              @toggleOpenState
+            </code>
+          </td>
+          <td>
+            <b>boolean</b>
+          </td>
+          <td>
+            Emits <span class="blue">true</span> when the toolbar is open, and <span class="blue">false</span> when it is closed. On load, the toolbar is closed, to keep user-interactions focused on your content. Listening to its open | closed state allows you to manage your UI conditionally. For example, perhaps you want to display specific information when it is open; or hide some elements from the page.<br><br>
+            Usage:<br><br>
+            <code>
+              &#x3c;template&#x3e;<br>
+              &nbsp;&nbsp;&#x3c;SvgAnnotator @toggleOpenState="myFunction" &#x3e;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;div&#x3e;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+              &nbsp;&nbsp;&#x3c;/SvgAnnotator&#x3e;<br>
+              &#x3c;/template&#x3e;<br><br>
+              &#x3c;script&#x3e;<br>
+              ...<br>
+              methods: {<br>
+              &nbsp;&nbsp;myFunction(isOpen) {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;...<br>
+              &nbsp;&nbsp;}<br>
+              }<br>
+              &#x3c;/script&#x3e;
+            </code>
+          </td>
+        </tr>
+      </table>
     </section>
 
     <section id="caveats">
@@ -471,6 +508,7 @@ export default {
   },
   data() {
     return {
+      isOpen: false,
       isTouchScreen: false,
     }
   },
@@ -478,6 +516,11 @@ export default {
     this.isTouchScreen = (function IIFE () {
       return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)
     })()
+  },
+  methods: {
+    toggleAnnotator(isOpen) {
+      this.isOpen = isOpen;
+    }
   }
 }
 </script>
