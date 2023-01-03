@@ -2,12 +2,12 @@
 A vue2 component you can use to wrap any content to enable on-the-go annotations and pdf generation.
 
 Features:
-. create shapes (rectangle, circle, arrow)
-. freehand drawing
-. add text (includes bullet points mode)
-. select, move, resize, copy paste, delete, redo shapes
-. select and group shapes in one single action
-. save to pdf (uses html2canvas & jspdf as dependencies)
+- create shapes (rectangle, circle, arrow)
+- freehand drawing
+- add text (includes bullet points mode)
+- select, move, resize, copy paste, group, ungroup delete, redo shapes
+- select and group shapes in one single action
+- save to pdf (uses html2canvas & jspdf as dependencies)
 
 ## Project setup
 ```
@@ -99,6 +99,7 @@ If your content contains multiple elements, place them inside a single div, sect
           tooltipDuplicate: "Duplicate",
           tooltipRedo: "Redo last shape",
           tooltipUndo: "Undo last shape",
+          tooltipUngroup: "Ungroup",
           tooltipPdf: "Save pdf"
         };
       },

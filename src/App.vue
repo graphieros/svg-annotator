@@ -199,6 +199,9 @@
         Select and group in one action
       </li>
       <li>
+        Ungroup
+      </li>
+      <li>
         Delete
       </li>
       <li>
@@ -340,6 +343,27 @@
       <tr>
         <td>
           <code>
+            iconColor
+          </code>
+        </td>
+        <td>
+          <span class="green">
+            String
+          </span>
+        </td>
+        <td>
+          <span class="blue">
+            #4a4a4a
+          </span>
+        </td>
+        <td>
+           Color of the button icons & button borders.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <code>
             showPrint
           </code>
         </td>
@@ -414,6 +438,7 @@
               &nbsp;&nbsp;tooltipDuplicate: "Duplicate",<br>
               &nbsp;&nbsp;tooltipRedo: "Redo last shape",<br>
               &nbsp;&nbsp;tooltipUndo: "Undo last shape",<br>
+              &nbsp;&nbsp;tooltipUngroup: "Ungroup",<br>
               &nbsp;&nbsp;tooltipPdf: "Save pdf"<br>
             }
            </code>
@@ -479,6 +504,9 @@
       </li>
       <li>
         During the pdf generation, all fonts will be converted to 'Helvetica', which is one of the default fonts supported by jspdf. Not providing your font in the prop 'fontFamily' will cause content to remain with 'Helvetica' after the pdf generation resumes.
+      </li>
+      <li>
+        If the group they were part of was moved, ungrouping elements will respawn them on their original x,y coordinates.
       </li>
      </ul>
     </section>

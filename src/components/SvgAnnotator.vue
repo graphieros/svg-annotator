@@ -45,6 +45,35 @@
             </span>
           </button>
 
+          <!-- UNGROUP -->
+          <button
+            :disabled="!currentGroup"
+            :class="{
+              'svg-annotator__button-tool': true,
+              'svg-annotator__tooltip-svg': true,
+            }"
+            @click="
+              deleteEmptyTextElement();
+              ungroup();
+              isSelectMode = false;
+              isDeleteMode = false;
+              isMoveMode = false;
+              isResizeMode = false;
+              isTextMode = false;
+              isWriting = false;
+              activeShape = 'group';
+              showCaret = false;
+            "
+            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+          >
+            <svg style="width: 80%" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M2,2H6V3H13V2H17V6H16V9H18V8H22V12H21V18H22V22H18V21H12V22H8V18H9V16H6V17H2V13H3V6H2V2M18,12V11H16V13H17V17H13V16H11V18H12V19H18V18H19V12H18M13,6V5H6V6H5V13H6V14H9V12H8V8H12V9H14V6H13M12,12H11V14H13V13H14V11H12V12Z" />
+            </svg>
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
+              {{ translations.tooltipUngroup }}
+            </span>
+          </button>
+
           <!-- DELETE -->
           <button
             :disabled="shapes.length === 0"
@@ -858,11 +887,6 @@
         :width="sourceWidth"
         :height="sourceHeight"
         @pointerdown="chooseAction($event)"
-        @touchmove="
-          setPointer($event);
-          chooseMove($event);
-        "
-        @touchend="resetDraw"
         @pointerup="resetDraw"
         @pointermove="
           setPointer($event);
@@ -913,7 +937,6 @@
 // . visibility toggle button, showing on svg TR if shapes
 // . save to JSON emit
 // . tutorial modal
-// . ungroup items (remove the first <g> from the DOM)
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 export default {
@@ -971,6 +994,7 @@ export default {
           tooltipDuplicate: "Duplicate",
           tooltipRedo: "Redo last shape",
           tooltipUndo: "Undo last shape",
+          tooltipUngroup: "Ungroup",
           tooltipPdf: "Save pdf",
         };
       },
@@ -990,6 +1014,7 @@ export default {
           end: 0,
         },
       },
+      currentGroup: undefined,
       currentTarget: undefined,
       hoveredShapeId: undefined,
       isBold: false,
@@ -1442,6 +1467,11 @@ export default {
     },
     clickSvg(e) {
       if (this.isDeleteMode) {
+        return;
+      }
+      if(e.target.id.includes("group")) {
+        const thisGroup = this.shapes.find(shape => shape.id === e.target.id);
+        this.currentGroup = thisGroup;
         return;
       }
       this.deleteEmptyTextElement();
@@ -2776,6 +2806,19 @@ export default {
         this.isWriting = false;
       }
       this.$emit("toggleOpenState", this.isSummaryOpen);
+    },
+    ungroup() {
+      this.shapes = this.shapes.filter(shape => shape.id !== this.currentGroup.id);
+      const ungroupedShapes = this.currentGroup.source.map(shape => {
+        return {
+          ...shape,
+          id: shape.oldId
+        }
+      });
+      ungroupedShapes.forEach(shape => {
+        this.shapes.push(shape)
+      });
+      this.currentGroup = undefined;
     },
     walkTheDOM(node, func) {
       func(node);
