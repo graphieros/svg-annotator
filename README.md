@@ -14,7 +14,7 @@ Features:
 npm i svg-annotator
 ```
 ## Documentation
-[Official documentation](https://svg-annotator.graphieros.com/)
+[Full documentation](https://svg-annotator.graphieros.com/)
 
 ## Implementation
 ```
@@ -115,6 +115,11 @@ If your content contains multiple elements, place them inside a single div, sect
         };
       },
     },
+```
+
+## Events
+```
+@toggleOpenState returns true if the toolbar is open, and false if it is closed.
 ```
 
 ## Caveats
