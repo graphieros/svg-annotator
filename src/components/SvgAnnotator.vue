@@ -32,11 +32,11 @@
               activeShape = 'group';
               showCaret = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor}`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
               <path
-                fill="currentColor"
+                :fill="iconColor"
                 d="M1,1V5H2V19H1V23H5V22H19V23H23V19H22V5H23V1H19V2H5V1M5,4H19V5H20V19H19V20H5V19H4V5H5M6,6V14H9V18H18V9H14V6M8,8H12V12H8M14,11H16V16H11V14H14"
               />
             </svg>
@@ -65,10 +65,10 @@
               activeShape = undefined;
               showCaret = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${!isDeleteMode ? iconColor : ''};`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
-              <path
+              <path :fill="!isDeleteMode ? iconColor : ''"
                 d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
               />
             </svg>
@@ -97,10 +97,10 @@
               isWriting = false;
               showCaret = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
-              <path
+              <path :fill="iconColor"
                 d="M13,11H18L16.5,9.5L17.92,8.08L21.84,12L17.92,15.92L16.5,14.5L18,13H13V18L14.5,16.5L15.92,17.92L12,21.84L8.08,17.92L9.5,16.5L11,18V13H6L7.5,14.5L6.08,15.92L2.16,12L6.08,8.08L7.5,9.5L6,11H11V6L9.5,7.5L8.08,6.08L12,2.16L15.92,6.08L14.5,7.5L13,6V11Z"
               />
             </svg>
@@ -129,10 +129,10 @@
               activeShape = undefined;
               showCaret = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
-              <path
+              <path :fill="iconColor"
                 d="M23,15H21V17H23V15M23,11H21V13H23V11M23,19H21V21C22,21 23,20 23,19M15,3H13V5H15V3M23,7H21V9H23V7M21,3V5H23C23,4 22,3 21,3M3,21H11V15H1V19A2,2 0 0,0 3,21M3,7H1V9H3V7M15,19H13V21H15V19M19,3H17V5H19V3M19,19H17V21H19V19M3,3C2,3 1,4 1,5H3V3M3,11H1V13H3V11M11,3H9V5H11V3M7,3H5V5H7V3Z"
               />
             </svg>
@@ -156,11 +156,11 @@
               showCaret = false;
               bringShapeTo('front');
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor}`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
               <path
-                fill="currentColor"
+                :fill="iconColor"
                 d="M2,2H11V6H9V4H4V9H6V11H2V2M22,13V22H13V18H15V20H20V15H18V13H22M8,8H16V16H8V8Z"
               />
             </svg>
@@ -184,11 +184,11 @@
               showCaret = false;
               bringShapeTo('back');
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
               <path
-                fill="currentColor"
+                :fill="iconColor"
                 d="M2,2H11V11H2V2M9,4H4V9H9V4M22,13V22H13V13H22M15,20H20V15H15V20M16,8V11H13V8H16M11,16H8V13H11V16Z"
               />
             </svg>
@@ -213,11 +213,11 @@
               showCaret = false;
               copyPaste();
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
               <path
-                fill="currentColor"
+                :fill="iconColor"
                 d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
               />
             </svg>
@@ -247,11 +247,11 @@
               showCaret = false;
               undoLastShape();
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; background: ${iconColor}; border: 1px solid ${iconColor};`"
           >
-            <svg style="width: 80%" viewBox="0 0 24 24">
+            <svg style="width: 80%; background: transparent;" viewBox="0 0 24 24">
               <path
-                fill="currentColor"
+                fill="white"
                 d="M12.5,8C9.85,8 7.45,9 5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22 10.54,10.5 12.5,10.5C16.04,10.5 19.05,12.81 20.1,16L22.47,15.22C21.08,11.03 17.15,8 12.5,8Z"
               />
             </svg>
@@ -281,11 +281,11 @@
               showCaret = false;
               redoLastShape();
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; background: ${iconColor}; border: 1px solid ${iconColor};`"
           >
-            <svg style="width: 80%" viewBox="0 0 24 24">
+            <svg style="width: 80%; background: transparent;" viewBox="0 0 24 24">
               <path
-                fill="currentColor"
+                fill="white"
                 d="M18.4,10.6C16.55,9 14.15,8 11.5,8C6.85,8 2.92,11.03 1.54,15.22L3.9,16C4.95,12.81 7.95,10.5 11.5,10.5C13.45,10.5 15.23,11.22 16.62,12.38L13,16H22V7L18.4,10.6Z"
               />
             </svg>
@@ -299,11 +299,11 @@
             v-if="showPrint"
             :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
             @click="print"
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
               <path
-                fill="grey"
+                :fill="iconColor"
                 d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
               />
             </svg>
@@ -324,7 +324,7 @@
               setShapeTo('circle');
               isSelectMode = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg viewBox="0 0 12 12" style="width: 100%">
               <circle
@@ -338,7 +338,7 @@
                       : selectedColor + colorTransparency
                     : 'none'
                 "
-                stroke="grey"
+                :stroke="iconColor"
               ></circle>
             </svg>
           </button>
@@ -362,7 +362,7 @@
               setShapeTo('rect');
               isSelectMode = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg viewBox="0 0 12 12" style="width: 100%">
               <rect
@@ -378,7 +378,7 @@
                       : selectedColor + colorTransparency
                     : 'none'
                 "
-                stroke="grey"
+                :stroke="iconColor"
               />
             </svg>
           </button>
@@ -403,7 +403,7 @@
               setShapeTo('arrow');
               isSelectMode = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg viewBox="0 0 24 24" style="width: 100%">
               <path
@@ -411,7 +411,7 @@
                   options.arrow.filled
                     ? activeShape === 'arrow'
                       ? 'white'
-                      : 'grey'
+                      : iconColor
                     : 'none'
                 "
                 stroke-width="2"
@@ -433,7 +433,7 @@
               setShapeTo('line');
               isSelectMode = false;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg viewBox="0 0 24 24" style="width: 100%">
               <path
@@ -441,7 +441,7 @@
                   options.arrow.filled
                     ? activeShape === 'line'
                       ? 'white'
-                      : 'grey'
+                      : iconColor
                     : 'none'
                 "
                 stroke-width="1"
@@ -537,10 +537,10 @@
               isDrawMode = false;
               activeShape = undefined;
             "
-            :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
           >
             <svg style="width: 80%" viewBox="0 0 24 24">
-              <path
+              <path :fill="iconColor"
                 d="M18.5,4L19.66,8.35L18.7,8.61C18.25,7.74 17.79,6.87 17.26,6.43C16.73,6 16.11,6 15.5,6H13V16.5C13,17 13,17.5 13.33,17.75C13.67,18 14.33,18 15,18V19H9V18C9.67,18 10.33,18 10.67,17.75C11,17.5 11,17 11,16.5V6H8.5C7.89,6 7.27,6 6.74,6.43C6.21,6.87 5.75,7.74 5.3,8.61L4.34,8.35L5.5,4H18.5Z"
               />
             </svg>
@@ -591,11 +591,11 @@
                 textAlign = 'start';
                 setSelectedTextAlignTo('start');
               "
-              :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
             >
               <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
-                  fill="currentColor"
+                  :fill="textAlign === 'start' ? 'white' : iconColor"
                   d="M3,3H21V5H3V3M3,7H15V9H3V7M3,11H21V13H3V11M3,15H15V17H3V15M3,19H21V21H3V19Z"
                 />
               </svg>
@@ -620,11 +620,11 @@
                 textAlign = 'middle';
                 setSelectedTextAlignTo('middle');
               "
-              :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
             >
               <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
-                  fill="currentColor"
+                  :fill="textAlign === 'middle' ? 'white' : iconColor"
                   d="M3,3H21V5H3V3M7,7H17V9H7V7M3,11H21V13H3V11M7,15H17V17H7V15M3,19H21V21H3V19Z"
                 />
               </svg>
@@ -649,11 +649,11 @@
                 textAlign = 'end';
                 setSelectedTextAlignTo('end');
               "
-              :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
             >
               <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
-                  fill="currentColor"
+                  :fill="textAlign === 'end' ? 'white' : iconColor"
                   d="M3,3H21V5H3V3M9,7H21V9H9V7M3,11H21V13H3V11M9,15H21V17H9V15M3,19H21V21H3V19Z"
                 />
               </svg>
@@ -679,11 +679,11 @@
                 setSelectedTextAlignTo('start');
                 setCurrentStyleOfSelectedText();
               "
-              :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
             >
               <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
-                  fill="currentColor"
+                  :fill="isBulletTextMode ? 'white' : iconColor"
                   d="M7,5H21V7H7V5M7,13V11H21V13H7M4,4.5A1.5,1.5 0 0,1 5.5,6A1.5,1.5 0 0,1 4,7.5A1.5,1.5 0 0,1 2.5,6A1.5,1.5 0 0,1 4,4.5M4,10.5A1.5,1.5 0 0,1 5.5,12A1.5,1.5 0 0,1 4,13.5A1.5,1.5 0 0,1 2.5,12A1.5,1.5 0 0,1 4,10.5M7,19V17H21V19H7M4,16.5A1.5,1.5 0 0,1 5.5,18A1.5,1.5 0 0,1 4,19.5A1.5,1.5 0 0,1 2.5,18A1.5,1.5 0 0,1 4,16.5Z"
                 />
               </svg>
@@ -707,11 +707,11 @@
                 isBold = !isBold;
                 setCurrentStyleOfSelectedText();
               "
-              :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
             >
               <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
-                  fill="currentColor"
+                  :fill="isBold ? 'white' : iconColor"
                   d="M13.5,15.5H10V12.5H13.5A1.5,1.5 0 0,1 15,14A1.5,1.5 0 0,1 13.5,15.5M10,6.5H13A1.5,1.5 0 0,1 14.5,8A1.5,1.5 0 0,1 13,9.5H10M15.6,10.79C16.57,10.11 17.25,9 17.25,8C17.25,5.74 15.5,4 13.25,4H7V18H14.04C16.14,18 17.75,16.3 17.75,14.21C17.75,12.69 16.89,11.39 15.6,10.79Z"
                 />
               </svg>
@@ -735,11 +735,11 @@
                 isItalic = !isItalic;
                 setCurrentStyleOfSelectedText();
               "
-              :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
             >
               <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
-                  fill="currentColor"
+                  :fill="isItalic ? 'white' : iconColor"
                   d="M10,4V7H12.21L8.79,15H6V18H14V15H11.79L15.21,7H18V4H10Z"
                 />
               </svg>
@@ -763,11 +763,11 @@
                 isUnderline = !isUnderline;
                 setCurrentStyleOfSelectedText();
               "
-              :style="`height:${buttonSize}px; width:${buttonSize}px;`"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
             >
               <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
-                  fill="currentColor"
+                  :fill="isUnderline ? 'white' : iconColor"
                   d="M5,21H19V19H5V21M12,17A6,6 0 0,0 18,11V3H15.5V11A3.5,3.5 0 0,1 12,14.5A3.5,3.5 0 0,1 8.5,11V3H6V11A6,6 0 0,0 12,17Z"
                 />
               </svg>
@@ -914,7 +914,6 @@
 // . save to JSON emit
 // . tutorial modal
 // . ungroup items (remove the first <g> from the DOM)
-
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 export default {
@@ -939,6 +938,10 @@ export default {
     hideWhenFolded: {
       type: Boolean,
       default: false,
+    },
+    iconColor: {
+      type: String,
+      default: "#4A4A4A",
     },
     showPrint: {
       type: Boolean,
@@ -1241,7 +1244,6 @@ export default {
                             ${this.includeDeleteButton(shape)}
                           </g>
 						        `;
-
           case shape && shape.type === "circle":
             return `
                           <g id="${shape.id}">
@@ -1298,7 +1300,6 @@ export default {
                           </g>
                           ${this.includeDeleteButton(shape)}
                         </g> `;
-
           case shape && shape.type === "rect":
             return `<g id="${shape.id}">
                           ${this.includeSelectionIndicator(shape)}
@@ -1863,12 +1864,10 @@ export default {
               this.selectedGroup.push(shape);
             }
             break;
-
           default:
             break;
         }
       });
-
       // add an old independant id to the selectedShape to keep track of old id
       // replace id of selected shape with the group id
       this.selectedGroup = this.selectedGroup.map((shape) => {
@@ -1887,10 +1886,8 @@ export default {
         const bannedIds = this.copy(this.selectedGroup).map((shape) => {
           return shape.oldId;
         });
-
         // remove selected shapes from the shapes array
         this.shapes = this.shapes.filter((shape) => !bannedIds.includes(shape.id));
-
         // redraw each shape in the context of the group
         this.selectedGroup.forEach((shape) => {
           switch (true) {
@@ -1910,7 +1907,6 @@ export default {
 								  />
               `;
               break;
-
             case shape.type === "rect":
               group.content += `
                 <rect
@@ -1986,7 +1982,6 @@ export default {
                   ${this.computeTextElement(shape, parsedContent, shape.isBulletTextMode)}
                 `;
               break;
-
             default:
               break;
           }
@@ -2022,7 +2017,6 @@ export default {
 								  />
               `;
             break;
-
           case shape.type === "rect":
             group.content += `
                 <rect
@@ -2125,7 +2119,6 @@ export default {
                   ${this.computeTextElement(shape, parsedContent, shape.isBulletTextMode)}
                 `;
             break;
-
           default:
             break;
         }
@@ -2797,6 +2790,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+details {
+  border-radius: 0 0 8px 8px;
+}
 summary {
   text-align: center;
   padding: 0 0 6px 0;
@@ -2827,10 +2823,10 @@ button.svg-annotator__button-tool {
     }
   }
   &--selected {
-    background: #ccc;
+    background: rgb(175, 175, 175);
     border: 1px solid rgb(42, 42, 42);
     svg {
-      background: #ccc;
+      background: rgb(175, 175, 175);
     }
     circle,
     rect {
