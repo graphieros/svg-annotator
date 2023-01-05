@@ -1469,7 +1469,7 @@ export default {
       if (this.isDeleteMode) {
         return;
       }
-      if(e.target.id.includes("group")) {
+      if(e.target.id.includes("g_r_o_u_p")) {
         const thisGroup = this.shapes.find(shape => shape.id === e.target.id);
         this.currentGroup = thisGroup;
         return;
@@ -1564,12 +1564,25 @@ export default {
       }
     },
     copyPaste() {
-      const shapeCopy = {
+      let shapeCopy = {
         ...this.lastSelectedShape,
-        id: `${this.lastSelectedShape.id}_copy`,
+        id: `${this.lastSelectedShape.type === 'group' ? `${this.lastSelectedShape.id.replaceAll('g_r_o_u_p', 'g_r_o_u_p_c_o_p_y')}` : `${this.lastSelectedShape.id}_copy`}`,
         x: this.lastSelectedShape.x - 100 < 0 ? 1 : this.lastSelectedShape.x - 100,
         y: this.lastSelectedShape.y - 100 < 0 ? 1 : this.lastSelectedShape.y - 100,
       };
+      if(shapeCopy.type === 'group') {
+        shapeCopy = {
+          ...shapeCopy,
+          content: this.lastSelectedShape.content.replaceAll("g_r_o_u_p", 'g_r_o_u_p_c_o_p_y'),
+          source: shapeCopy.source.map(shape => {
+            return {
+              ...shape,
+              id: shape.id.replaceAll("g_r_o_u_p", "g_r_o_u_p_c_o_p_y")
+            }
+          })
+        }
+      }
+      this.activeShape = shapeCopy.type;
       this.shapes.push(shapeCopy);
     },
     includeDeleteButton(shape, isBulletTextMode = false) {
@@ -2528,7 +2541,7 @@ export default {
         case this.activeShape === "group":
           this.shapes.push({
             alpha: 1,
-            id: `group_${Math.random() * 10000}_${Date.now()}`,
+            id: `g_r_o_u_p_${Math.random() * 10000}_${Date.now()}`,
             x: this.pointerPosition.x,
             y: this.pointerPosition.y,
             isFilled: false,
