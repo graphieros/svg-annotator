@@ -10,7 +10,7 @@
   }, 
   "license": "MIT",
   "keywords": ["annotator", "vue 2", "svg annotator", "svg", "annotation", "data annotation"],
-  "version": "0.3.6",
+  "version": "0.3.7",
   "main" : "./dist/svgAnnotator.common.js",
   "files": [
     "dist/*"

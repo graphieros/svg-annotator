@@ -127,6 +127,9 @@ If your content contains multiple elements, place them inside a single div, sect
 ```
 @toggleOpenState returns true if the toolbar is open, and false if it is closed.
 ```
+```
+@interface exposes methods to the parent (since version 0.3.7) See full documentation for an implementation example.
+```
 
 ## Caveats
 
