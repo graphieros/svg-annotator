@@ -937,6 +937,7 @@
 // . visibility toggle button, showing on svg TR if shapes
 // . save to JSON emit
 // . tutorial modal
+// . add a reset method that can be called from the outside
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 export default {
@@ -1404,6 +1405,9 @@ export default {
     },
   },
   mounted() {
+    this.$emit("interface", {
+      reset: () => this.reset()
+    });
     const wrapper = this.$refs.drawSvgContainer;
     let foundSvg = false;
     this.walkTheDOM(wrapper, (node) => {
@@ -2841,6 +2845,12 @@ export default {
         node = node.nextSibling;
       }
     },
+    reset(){
+      this.selectedGroup = [];
+      this.shapes = [];
+      this.shapesOrder = [];
+      this.undoStack = [];
+    }
   },
 };
 </script>
