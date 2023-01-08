@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="overflow-x:auto;">
     <header>
       <h1 class="righteous" style="z-index:1">
         SVG Annotator for Vue 2
@@ -416,30 +416,32 @@
       <section id="props">
       <h2 class="righteous" ref="props"><img src="./assets/logo.png" height="20" class="chevron">Props</h2>
       <table>
-        <tr>
-          <th>Prop</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-
-        <tr>
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
           <td>
             <code>
               buttonSize
             </code>
           </td>
-          <td>
+          <td data-label="Type">
             <span class="green">
               Number
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="dirtyGreen">
               28
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             Adjust the size of the toolbar buttons.
           </td>
         </tr>
@@ -450,17 +452,17 @@
               disableForTouchScreens
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               Boolean
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="blue">
               true
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             In its current version, <b style="color: rgb(200,100,100);">SvgAnnotator is not suited for touchscreen devices</b>, and best used with a mouse & keyboard. This prop hides the toolbar for touchscreen devices, basically deactivating the annotator.
           </td>
         </tr>
@@ -471,17 +473,17 @@
           fixedTools
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               Boolean
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="blue">
               false
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             Set to false by default, the toolbar is relative to the component. <b>Set to true to position the toolbar fixed top center of the page.</b> This is an ideal scenario if the svg-annotator wraps a whole page, in order to avoid having to scroll back to use the toolbar.
           </td>
         </tr>
@@ -492,17 +494,17 @@
               fontFamily
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               String
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="orange">
               Helvetica
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             It is recommended you pass your font into this prop. During the printing process, all fonts of the slotted content will be converted to Helvetica, as it is one of the fonts jspdf (used as a dependency to generate pdf) supports. After the process resumes, the fonts will be reset to the font family passed into this prop. <b style="color: rgb(200,100,100);">Not providing your font would make the content stay set to Helvetica after the printing resumes.</b>
           </td>
         </tr>
@@ -513,17 +515,17 @@
               hiddenWhenFolded
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               Boolean
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="blue">
               false
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             When the toolbar is open, the annotating area is placed on top of the content, to allow user interaction with the svg-annotator. However, when the toolbar is reduced, the content gets placed back on top, to allow user interaction with the original content. In this case, annotations will appear below the content. To avoid cases where this would be weird, <b>set this prop to true to hide the annotations when the toolbar is closed.</b>
           </td>
         </tr>
@@ -534,17 +536,17 @@
               iconColor
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               String
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="blue">
               #4a4a4a
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             Color of the button icons & button borders.
           </td>
         </tr>
@@ -555,17 +557,17 @@
               showPrint
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               Boolean
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="blue">
               true
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             Set to false to hide the print button in the toolbar and remove pdf generation capability.
           </td>
         </tr>
@@ -576,17 +578,17 @@
               showTooltips
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               Boolean
             </span>
           </td>
-          <td>
+          <td data-label="Default ">
             <span class="blue">
               true
             </span>
           </td>
-          <td>
+          <td data-label="Description : ">
             Set to false to hide the tooltips of the toolbar's upper row buttons.
           </td>
         </tr>
@@ -597,15 +599,15 @@
               translations
             </code>
           </td>
-          <td>
+          <td data-label="Type ">
             <span class="green">
               Object
             </span>
           </td>
-          <td style="width:fit-content !important">
+          <td style="width:fit-content !important" data-label="Default ">
             <i>see description</i>
           </td>
-          <td>
+          <td data-label="Description : ">
             You can provide your own translations for all labels and tooltips of the toolbar.<br>
             Default translations:<br>
             <code style="background: white;">
@@ -632,49 +634,56 @@
             </code>
           </td>
         </tr>
+        </tbody>
+        
       </table>
       </section>
 
       <section id="events">
         <h2 class="righteous" ref="events"><img src="./assets/logo.png" height="20" class="chevron">Events</h2>
         <table>
-          <tr>
-            <th>Event</th>
-            <th>Returns</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>
-              <code>
-                @toggleOpenState
-              </code>
-            </td>
-            <td>
-              <b>boolean</b>
-            </td>
-            <td>
-              Emits <span class="blue">true</span> when the toolbar is open, and <span class="blue">false</span> when it is closed. On load, the toolbar is closed, to keep user-interactions focused on your content. Listening to its open | closed state allows you to manage your UI conditionally. For example, perhaps you want to display specific information when it is open; or hide some elements from the page.<br><br>
-              Usage:<br><br>
-              <code>
-                &#x3c;template&#x3e;<br>
-                &nbsp;&nbsp;&#x3c;SvgAnnotator @toggleOpenState="myFunction" &#x3e;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;div&#x3e;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/div&#x3e;<br>
-                &nbsp;&nbsp;&#x3c;/SvgAnnotator&#x3e;<br>
-                &#x3c;/template&#x3e;<br><br>
-                &#x3c;script&#x3e;<br>
-                ...<br>
-                methods: {<br>
-                &nbsp;&nbsp;myFunction(isOpen) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;...<br>
-                &nbsp;&nbsp;}<br>
-                }<br>
-                &#x3c;/script&#x3e;
-              </code>
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>
+                  @toggleOpenState
+                </code>
+              </td>
+              <td data-label="Returns ">
+                <b>boolean</b>
+              </td>
+              <td data-label="Description : ">
+                Emits <span class="blue">true</span> when the toolbar is open, and <span class="blue">false</span> when it is closed. On load, the toolbar is closed, to keep user-interactions focused on your content. Listening to its open | closed state allows you to manage your UI conditionally. For example, perhaps you want to display specific information when it is open; or hide some elements from the page.<br><br>
+                Usage:<br><br>
+                <code>
+                  &#x3c;template&#x3e;<br>
+                  &nbsp;&nbsp;&#x3c;SvgAnnotator @toggleOpenState="myFunction" &#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;div&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+                  &nbsp;&nbsp;&#x3c;/SvgAnnotator&#x3e;<br>
+                  &#x3c;/template&#x3e;<br><br>
+                  &#x3c;script&#x3e;<br>
+                  ...<br>
+                  methods: {<br>
+                  &nbsp;&nbsp;myFunction(isOpen) {<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;...<br>
+                  &nbsp;&nbsp;}<br>
+                  }<br>
+                  &#x3c;/script&#x3e;
+                </code>
+              </td>
+            </tr>
+          </tbody>
+          
         </table>
       </section>
 
@@ -914,6 +923,7 @@ table {
   border-radius: 4px;
   padding: 12px;
   background: white;
+
 }
 td {
   padding: 12px;
@@ -937,5 +947,27 @@ section {
 }
 footer {
   background: white;
+}
+@media (max-width: 700px){
+  table thead {
+  display: none;
+  background: red;
+  }
+
+  table tr{
+  display: block;
+  margin-bottom: 40px;
+  }
+
+  table td {
+  display: block;
+
+  }
+
+  table td:before {
+  content: attr(data-label) ' ' ' ㅤ ';
+  float: left;
+  font-weight: bold;
+  }
 }
 </style>
