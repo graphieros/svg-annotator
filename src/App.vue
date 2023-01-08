@@ -51,7 +51,7 @@
           <code style="margin:0 auto;">npm i svg-annotator</code>
       </p>
     </div>
-      <SvgAnnotator showPrint>
+      <SvgAnnotator showPrint @interface="getAnnotatorInterface">
         <div style="width: 100%; height: 500px; background: rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center; color: rgba(0,0,0,0.3); font-size:1rem;">
           <p v-if="isTouchScreen" style="padding: 0 48px; color: rgb(200,100,100)">
             SvgAnnotator is disabled by default on touchscreens.
@@ -682,6 +682,56 @@
                 </code>
               </td>
             </tr>
+
+            <tr>
+              <td>
+                <code>
+                  @interface
+                </code>
+              </td>
+              <td data-label="Interface">
+                <b>Object</b>
+              </td>
+              <td data-label="Description : ">
+                @interface exposes some methods of the svg-annotator you can call from the parent (from version 0.3.7 onwards)<br><br>
+                Usage: <br><br>
+                <code>
+                  &#x3c;template&#x3e;<br>
+                  &nbsp;&nbsp;&#x3c;div&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;button @click="resetAnnotator"&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/button&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;SvgAnnotator @interface="getInterface" &#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;div&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;h1&#x3e;My chart&#x3c;/h1&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;chart /&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&#x3c;/SvgAnnotator&#x3e;<br>
+                  &nbsp;&nbsp;&#x3c;/div&#x3e;<br>
+                  &#x3c;/template&#x3e;<br><br>
+                  &#x3c;script&#x3e;<br>
+                  export default {<br>
+                  &nbsp;&nbsp; data(){<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp; return {<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; annotatorInterface: {<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reset: () => {}<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;}<br>
+                  &nbsp;&nbsp; },<br>
+                  &nbsp;&nbsp; methods: {<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;getInterface(payload) {<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;this.$options.annotatorInterface = payload;<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;},<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;resetAnnotator() {<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;this.$options.annotatorInterface.reset();<br>
+                  &nbsp;&nbsp; &nbsp;&nbsp;}<br>
+                  &nbsp;&nbsp; }<br>
+                  }<br>
+                  &#x3c;/script&#x3e;
+                </code>
+                
+              </td>
+            </tr>
           </tbody>
           
         </table>
@@ -737,7 +787,10 @@ export default {
       currentScroll: undefined,
       isOpen: false,
       isTouchScreen: false,
-      observer: null
+      observer: null,
+      resetInterface: {
+        reset: () => {}
+      }
     }
   },
   mounted() {
@@ -751,6 +804,12 @@ export default {
     window.removeEventListener("scroll", this.checkMenuVisibility);
   },
   methods: {
+    getAnnotatorInterface(payload){
+      this.$options.resetInterface = payload;
+    },
+    resetAnnotator(){
+      this.$options.resetInterface.reset();
+    },
     checkMenuVisibility(){
       if(this.isVisible(this.getElement('setup'))){
         this.currentScroll = 'setup';
