@@ -862,7 +862,7 @@
         :key="step"
         ref="mainSvg"
         :class="{ draw: true, 'draw--free': activeShape === 'line' }"
-        :style="`cursor:${cursorClass}; font-family: Helvetica;`"
+        :style="`cursor:${cursorClass}; font-family: Helvetica; background: transparent !important;`"
         :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
         :width="sourceWidth"
         :height="sourceHeight"
@@ -882,7 +882,7 @@
         :key="step"
         ref="mainSvg"
         :class="{ draw: true, 'draw--free': activeShape === 'line' }"
-        :style="`cursor:${cursorClass}; font-family: Helvetica; z-index: 100000000;`"
+        :style="`cursor:${cursorClass}; font-family: Helvetica; z-index: 100000000; background: transparent !important;`"
         :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
         :width="sourceWidth"
         :height="sourceHeight"
@@ -912,7 +912,7 @@
         ></g>
       </svg>
       <svg
-        style="position: absolute; top: 0; left: 0"
+        style="position: absolute; top: 0; left: 0; background: transparent !important;"
         v-if="isPrinting"
         :height="sourceHeight"
         :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
