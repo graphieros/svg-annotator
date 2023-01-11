@@ -2,6 +2,7 @@
   <div :style="`font-family:${fontFamily}`">
     <div data-html2canvas-ignore v-if="!isTouchScreen">
       <details
+        ref="svgAnnotatorToolbox"
         @toggle="toggleSummary"
         :style="`${
           fixedTools && isSummaryOpen
@@ -863,7 +864,7 @@
         ref="mainSvg"
         :class="{ draw: true, 'draw--free': activeShape === 'line' }"
         :style="`cursor:${cursorClass}; font-family: Helvetica; background: transparent !important;`"
-        :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
+        :viewBox="`0 0 ${svgWidth ? svgWidth : 1} ${svgHeight ? svgHeight : 1}`"
         :width="sourceWidth"
         :height="sourceHeight"
         style="position: absolute; top: 0; left: 0"
@@ -883,7 +884,7 @@
         ref="mainSvg"
         :class="{ draw: true, 'draw--free': activeShape === 'line' }"
         :style="`cursor:${cursorClass}; font-family: Helvetica; z-index: 100000000; background: transparent !important;`"
-        :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
+        :viewBox="`0 0 ${svgWidth ? svgWidth : 1} ${svgHeight ? svgHeight : 1}`"
         :width="sourceWidth"
         :height="sourceHeight"
         @pointerdown="chooseAction($event)"
@@ -915,7 +916,7 @@
         style="position: absolute; top: 0; left: 0; background: transparent !important;"
         v-if="isPrinting"
         :height="sourceHeight"
-        :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
+        :viewBox="`0 0 ${svgWidth ? svgWidth : 1} ${svgHeight ? svgHeight : 1}`"
         :width="sourceWidth"
       >
         <circle
@@ -974,6 +975,10 @@ export default {
     showTooltips: {
       type: Boolean,
       default: true,
+    },
+    toolboxOpen: {
+      type: Boolean,
+      default: false,
     },
     translations: {
       type: Object,
@@ -1445,6 +1450,10 @@ export default {
           navigator.msMaxTouchPoints > 0
         );
       })() && this.disableForTouchScreens;
+    
+    if(this.toolboxOpen){
+      this.$refs.svgAnnotatorToolbox.open = true;
+    }
   },
   destroyed() {
     window.removeEventListener("keydown", (e) => {

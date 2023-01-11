@@ -51,7 +51,7 @@
           <code style="margin:0 auto;">npm i svg-annotator</code>
       </p>
     </div>
-      <SvgAnnotator showPrint @interface="getAnnotatorInterface">
+      <SvgAnnotator showPrint @interface="getAnnotatorInterface" :toolboxOpen="true">
         <div style="width: 100%; height: 500px; background: rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center; color: rgba(0,0,0,0.3); font-size:1rem;">
           <p v-if="isTouchScreen" style="padding: 0 48px; color: rgb(200,100,100)">
             SvgAnnotator is disabled by default on touchscreens.
