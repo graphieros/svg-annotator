@@ -863,7 +863,7 @@
         ref="mainSvg"
         :class="{ draw: true, 'draw--free': activeShape === 'line' }"
         :style="`cursor:${cursorClass}; font-family: Helvetica; background: transparent !important;`"
-        :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
+        :viewBox="`0 0 ${svgWidth ? svgWidth : 1} ${svgHeight ? svgHeight : 1}`"
         :width="sourceWidth"
         :height="sourceHeight"
         style="position: absolute; top: 0; left: 0"
@@ -883,7 +883,7 @@
         ref="mainSvg"
         :class="{ draw: true, 'draw--free': activeShape === 'line' }"
         :style="`cursor:${cursorClass}; font-family: Helvetica; z-index: 100000000; background: transparent !important;`"
-        :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
+        :viewBox="`0 0 ${svgWidth ? svgWidth : 1} ${svgHeight ? svgHeight : 1}`"
         :width="sourceWidth"
         :height="sourceHeight"
         @pointerdown="chooseAction($event)"
@@ -915,7 +915,7 @@
         style="position: absolute; top: 0; left: 0; background: transparent !important;"
         v-if="isPrinting"
         :height="sourceHeight"
-        :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
+        :viewBox="`0 0 ${svgWidth ? svgWidth : 1} ${svgHeight ? svgHeight : 1}`"
         :width="sourceWidth"
       >
         <circle
