@@ -2,6 +2,7 @@
   <div :style="`font-family:${fontFamily}`">
     <div data-html2canvas-ignore v-if="!isTouchScreen">
       <details
+        ref="svgAnnotatorToolbox"
         @toggle="toggleSummary"
         :style="`${
           fixedTools && isSummaryOpen
@@ -975,6 +976,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    toolboxOpen: {
+      type: Boolean,
+      default: false,
+    },
     translations: {
       type: Object,
       default() {
@@ -1445,6 +1450,10 @@ export default {
           navigator.msMaxTouchPoints > 0
         );
       })() && this.disableForTouchScreens;
+    
+    if(this.toolboxOpen){
+      this.$refs.svgAnnotatorToolbox.open = true;
+    }
   },
   destroyed() {
     window.removeEventListener("keydown", (e) => {
