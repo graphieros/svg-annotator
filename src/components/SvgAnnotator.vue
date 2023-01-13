@@ -2603,7 +2603,7 @@ export default {
           shape.y = this.copy(this.pointerPosition.y - shape.rectHeight / 2);
           break;
         case shape.type === "text":
-          const selectedText = Array.from(document.getElementsByTagName("text")).find(
+          const selectedText = Array.from(this.$refs.mainSvg.getElementsByTagName("text")).find(
             (textElement) => textElement.id === shape.id
           );
           if (!selectedText) {
