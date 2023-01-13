@@ -75,11 +75,6 @@ If your content contains multiple elements, place them inside a single div, sect
       type: String,
       default: "Helvetica",
     },
-    hideWhenFolded: {
-      // Hide annotations when the toolbox is closed.
-      type: Boolean,
-      default: false,
-    },
     iconColor: {
       // Color of the button icons & borders
       type: String,
@@ -135,6 +130,5 @@ If your content contains multiple elements, place them inside a single div, sect
 
 - Moving a shape too quickly can make the pointer leave the current shape and focus on another shape.<br>
 - While the menu is open, the drawing area is above the content that was placed in the slot. User interaction with the slotted content is not possible, as all interactions will concern the SvgAnnotator.<br>
-- When the menu is closed, the slotted content pops back to the top layer, to restore user interaction to your content. However, all annotations will appear below your content. You can set the prop 'hideWhenFolded' to true to hide annotations when the menu is closed.<br>
 - During the pdf generation, all fonts will be converted to 'Helvetica', which is one of the default fonts supported by jspdf. Not providing your font in the prop 'fontFamily' will cause content to remain with 'Helvetica' after the pdf generation resumes.
 

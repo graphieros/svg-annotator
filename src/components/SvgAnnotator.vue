@@ -857,25 +857,6 @@
       ref="drawSvgContainer"
       style="position: relative"
     >
-      <svg
-        id="annotatorSvg"
-        v-if="!isSummaryOpen && !hideWhenFolded"
-        :key="step"
-        ref="mainSvg"
-        :class="{ draw: true, 'draw--free': activeShape === 'line' }"
-        :style="`cursor:${cursorClass}; font-family: Helvetica; background: transparent !important;`"
-        :viewBox="`0 0 ${svgWidth ? svgWidth : 1} ${svgHeight ? svgHeight : 1}`"
-        :width="sourceWidth"
-        :height="sourceHeight"
-        style="position: absolute; top: 0; left: 0"
-      >
-        <g
-          v-for="(shape, i) in userShapes"
-          :key="`shape_${i}`"
-          :id="shape.id"
-          v-html="shape"
-        ></g>
-      </svg>
       <slot></slot>
       <svg
         id="annotatorSvg"
