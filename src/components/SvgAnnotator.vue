@@ -1384,19 +1384,11 @@ export default {
             const parsedText = shape.textContent.split("‎");
             const parsedContent = [];
             for (let i = 0; i < parsedText.length; i += 1) {
-              parsedContent.push(`${
-                shape.isBulletTextMode
-                  ? `<tspan x="${shape.x - shape.fontSize}" y="${
-                      shape.y + shape.fontSize * i
-                    }" id="${shape.id}" font-size="${
-                      shape.fontSize / 2
-                    } font-family="Helvetica">⬤</tspan>`
-                  : ""
-              }
+              parsedContent.push(`
 					  <tspan font-family="Helvetica" id="${shape.id}" x="${shape.x}" y="${
                 shape.y + shape.fontSize * i
               }">
-						  ${parsedText[i]}
+						  ${shape.isBulletTextMode ? '• ' : ''} ${parsedText[i]}
 					  </tspan>`);
             }
             return `
