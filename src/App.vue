@@ -59,7 +59,6 @@
           <p style="padding: 0 48px;">
             This grey area represents the content slotted inside the SvgAnnotator. In this case it's a simple DIV containing this text, but it can be an image, a chart, a whole page...
           </p>
-          
         </div>
       </SvgAnnotator>
 
@@ -512,27 +511,6 @@
         <tr>
           <td>
             <code>
-              hiddenWhenFolded
-            </code>
-          </td>
-          <td data-label="Type ">
-            <span class="green">
-              Boolean
-            </span>
-          </td>
-          <td data-label="Default ">
-            <span class="blue">
-              false
-            </span>
-          </td>
-          <td data-label="Description : ">
-            When the toolbar is open, the annotating area is placed on top of the content, to allow user interaction with the svg-annotator. However, when the toolbar is reduced, the content gets placed back on top, to allow user interaction with the original content. In this case, annotations will appear below the content. To avoid cases where this would be weird, <b>set this prop to true to hide the annotations when the toolbar is closed.</b>
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <code>
               iconColor
             </code>
           </td>
@@ -745,9 +723,6 @@
         </li>
         <li>
           While the menu is open, the drawing area is above the content that was placed in the slot. User interaction with the slotted content is not possible, as all interactions will concern the SvgAnnotator.
-        </li>
-        <li>
-          When the menu is closed, the slotted content pops back to the top layer, to restore user interaction to your content. However, all annotations will appear below your content. You can set the prop 'hideWhenFolded' to true to hide annotations when the menu is closed.
         </li>
         <li>
           During the pdf generation, all fonts will be converted to 'Helvetica', which is one of the default fonts supported by jspdf. Not providing your font in the prop 'fontFamily' will cause content to remain with 'Helvetica' after the pdf generation resumes.
