@@ -8,6 +8,8 @@ Features:
 . select, move, resize, copy paste, delete, group & ungroup, redo shapes
 . select and group shapes in one single action
 . save to pdf (uses html2canvas & jspdf as dependencies)
+. choose print orientation
+. hd or low lef print
 
 ## Project setup
 ```
@@ -100,6 +102,7 @@ If your content contains multiple elements, place them inside a single div, sect
           dashedLines: "Dashed lines",
           filled: "Filled",
           fontSize: "Font size",
+          hdPrint: "hd print",
           thickness: "Thickness",
           title: "Annotations",
           tooltipGroup: "Select & group",
