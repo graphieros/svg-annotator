@@ -325,22 +325,43 @@
           </button>
 
           <!-- PRINT -->
-          <button
-            v-if="showPrint"
-            :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
-            @click="print"
-            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
-          >
-            <svg style="width: 80%" viewBox="0 0 24 24">
-              <path
-                :fill="iconColor"
-                d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
-              />
-            </svg>
-            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
-              {{ translations.tooltipPdf }}
-            </span>
-          </button>
+          <div class="dropdown">
+            <button
+              v-if="showPrint"
+              :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true, 'dropbtn': true }"
+              :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor}; cursor: default !important;`"
+            >
+              <svg style="width: 80%" viewBox="0 0 24 24">
+                <path
+                  :fill="iconColor"
+                  d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
+                />
+              </svg>
+              <span v-if="showTooltips" class="svg-annotator__tooltiptext">
+                {{ translations.tooltipPdf }}
+              </span>
+            </button>
+            <div class="dropdown-content">
+              <button :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }" :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`" @click="print('p')">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M17,19H7V5H17M17,3H7A2,2 0 0,0 5,5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V5C19,3.89 18.1,3 17,3Z" />
+              </svg>
+              </button>
+              <button :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }" :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"  @click="print('l')">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M19,17H5V7H19M19,5H5A2,2 0 0,0 3,7V17A2,2 0 0,0 5,19H19A2,2 0 0,0 21,17V7C21,5.89 20.1,5 19,5Z" />
+              </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- HD PRINT CHECKBOX -->
+          <div class="svg-annotator__tool-input">
+            <label for="hdPrint">
+              {{ translations.hdPrint }}
+            </label>
+            <input id="hdPrint" type="checkbox" v-model="hd">
+          </div>
         </div>
 
         <!-- SET SHAPE TO CIRCLE -->
@@ -970,6 +991,7 @@ export default {
           dashedLines: "Dashed lines",
           filled: "Filled",
           fontSize: "Font size",
+          hdPrint: "hd print",
           thickness: "Thickness",
           title: "Annotations",
           tooltipGroup: "Select & group",
@@ -1003,6 +1025,7 @@ export default {
       },
       currentGroup: undefined,
       currentTarget: undefined,
+      hd: true,
       hoveredShapeId: undefined,
       isBold: false,
       isBulletTextMode: false,
@@ -2614,7 +2637,7 @@ export default {
         this.move(shape);
       }
     },
-    print() {
+    print(orientation = 'p') {
       this.isPrinting = true;
       this.isDeleteMode = false;
       this.isMoveMode = false;
@@ -2642,37 +2665,46 @@ export default {
             node.replaceWith(node);
           }
         });
-        html2canvas(wrapper, { useCORS: true })
+
+        const standardSize = {
+            height: orientation === "p" ? 851.89 : 595.28,
+            width: orientation === "p" ? 595.28 : 851.89
+        };
+
+        html2canvas(wrapper, { useCORS: true, scale: this.hd ? 2 : 1 })
           .then((canvas) => {
-            const contentWidth = canvas.width;
             const contentHeight = canvas.height;
-            const pageHeight = (contentWidth / a4.width) * a4.height;
+            const contentWidth = canvas.width;
+            const pageHeight = contentWidth / standardSize.width * standardSize.height;
             let leftHeight = contentHeight;
             let position = 0;
-            const imgWidth = a4.width;
-            const imgHeight = (582.28 / contentWidth) * contentHeight;
+            const imgWidth = standardSize.width;
+            const imgHeight = standardSize.width / contentWidth * contentHeight;
             const pageData = canvas.toDataURL("image/png", 1.0);
-            const pdf = new JsPDF("", "pt", "a4");
+            const pdf = new JsPDF(orientation, 'pt', 'a4');
+
+            // centering
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            const widthRatio = pdfWidth / canvas.width;
+            const heightRatio = pdfHeight / canvas.height;
+            const ratio = widthRatio > heightRatio ? heightRatio : widthRatio;
+            const canvasWidth = canvas.width * ratio;
+            const canvasHeight = canvas.height * ratio;
+            const marginX = (pdfWidth - canvasWidth) / 2;
+            const marginY = (pdfHeight - canvasHeight) / 2;
+
             if (leftHeight < pageHeight) {
-              pdf.addImage(pageData, "PNG", 0, 0, imgWidth, imgHeight, "", "FAST");
+                pdf.addImage(pageData, 'PNG', marginX, marginY, canvasWidth, canvasHeight, '', this.hd ? '' : 'FAST');
             } else {
-              while (leftHeight > 0) {
-                pdf.addImage(
-                  pageData,
-                  "PNG",
-                  0,
-                  position,
-                  imgWidth,
-                  imgHeight,
-                  "",
-                  "FAST"
-                );
-                leftHeight -= pageHeight;
-                position -= a4.height - 24;
-                if (leftHeight > 0) {
-                  pdf.addPage();
+                while (leftHeight > 0) {
+                    pdf.addImage(pageData, 'PNG', 0, position, imgWidth, imgHeight, '', this.hd ? '' : 'FAST');
+                    leftHeight -= pageHeight;
+                    position -= standardSize.height - 24;
+                    if (leftHeight > 0) {
+                        pdf.addPage();
+                    }
                 }
-              }
             }
             pdf.save(`${new Date().toLocaleDateString()}_annotations.pdf`);
           })
@@ -3001,4 +3033,25 @@ summary {
     box-shadow: none !important;
   }
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 0 0 0;
+}
+
 </style>
