@@ -97,6 +97,7 @@ If your content contains multiple elements, place them inside a single div, sect
       type: Object,
       default() {
         return {
+          autoOrientation: "auto print orientation",
           color: "Color",
           colorAlpha: "Color alpha",
           dashedLines: "Dashed lines",
