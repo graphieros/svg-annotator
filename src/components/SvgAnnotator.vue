@@ -324,10 +324,27 @@
             </span>
           </button>
 
-          <!-- PRINT -->
-          <div class="dropdown">
+          <!-- PRINT AUTO -->
+          <button
+            v-if="showPrint && autoOrientation"
+            :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
+            @click="print(calcOrientation())"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
+          >
+            <svg style="width: 80%" viewBox="0 0 24 24">
+              <path
+                :fill="iconColor"
+                d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"
+              />
+            </svg>
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
+              {{ translations.tooltipPdf }}
+            </span>
+          </button>
+
+          <!-- PRINT DROPDOWN -->
+          <div class="dropdown" v-if="showPrint && !autoOrientation">
             <button
-              v-if="showPrint"
               :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true, 'dropbtn': true }"
               :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor}; cursor: default !important;`"
             >
@@ -361,6 +378,14 @@
               {{ translations.hdPrint }}
             </label>
             <input id="hdPrint" type="checkbox" v-model="hd">
+          </div>
+
+          <!-- AUTO ORIENTATION CHECKBOX -->
+          <div class="svg-annotator__tool-input" style="width: 60px;">
+            <label for="autoOrientation" style="width: 100%; text-align:center;">
+              {{ translations.autoOrientation }}
+            </label>
+            <input id="autoOrientation" type="checkbox" v-model="autoOrientation">
           </div>
         </div>
 
@@ -986,6 +1011,7 @@ export default {
       type: Object,
       default() {
         return {
+          autoOrientation: "auto print orientation",
           color: "Color",
           colorAlpha: "Color alpha",
           dashedLines: "Dashed lines",
@@ -1012,6 +1038,7 @@ export default {
   data() {
     return {
       activeShape: undefined,
+      autoOrientation: true,
       strokeSize: 1,
       currentPointer: {
         start: {
@@ -1472,6 +1499,25 @@ export default {
           break;
         default:
           return;
+      }
+    },
+    calcOrientation() {
+      const printContent = this.$refs.drawSvgContainer;
+      if(!printContent) return;
+      const { height, width } = printContent.getBoundingClientRect();
+
+      switch (true) {
+        case height > width:
+          return 'p';
+
+        case width > height:
+          return 'l';
+
+        case height === width:
+          return 'p';  
+
+        default:
+          return 'p';
       }
     },
     clickSvg(e) {
@@ -2637,7 +2683,7 @@ export default {
         this.move(shape);
       }
     },
-    print(orientation = 'p') {
+    print(orientation="p") {
       this.isPrinting = true;
       this.isDeleteMode = false;
       this.isMoveMode = false;
@@ -2673,38 +2719,62 @@ export default {
 
         html2canvas(wrapper, { useCORS: true, scale: this.hd ? 2 : 1 })
           .then((canvas) => {
-            const contentHeight = canvas.height;
             const contentWidth = canvas.width;
+            const contentHeight = canvas.height;
             const pageHeight = contentWidth / standardSize.width * standardSize.height;
             let leftHeight = contentHeight;
             let position = 0;
             const imgWidth = standardSize.width;
             const imgHeight = standardSize.width / contentWidth * contentHeight;
             const pageData = canvas.toDataURL("image/png", 1.0);
-            const pdf = new JsPDF(orientation, 'pt', 'a4');
+            const pdf = new JsPDF(orientation, "pt", "a4");
+            const isOnePage = imgHeight < pageHeight;
 
-            // centering
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            const widthRatio = pdfWidth / canvas.width;
-            const heightRatio = pdfHeight / canvas.height;
-            const ratio = widthRatio > heightRatio ? heightRatio : widthRatio;
-            const canvasWidth = canvas.width * ratio;
-            const canvasHeight = canvas.height * ratio;
-            const marginX = (pdfWidth - canvasWidth) / 2;
-            const marginY = (pdfHeight - canvasHeight) / 2;
+            if(isOnePage) {
+              const pdfWidth = pdf.internal.pageSize.getWidth();
+              const pdfHeight = pdf.internal.pageSize.getHeight();
+              const widthRatio = pdfWidth / canvas.width;
+              const heightRatio = pdfHeight / canvas.height;
+              const ratio = widthRatio > heightRatio ? heightRatio : widthRatio;
+              const canvasWidth = canvas.width * ratio;
+              const canvasHeight = canvas.height * ratio;
+              const marginX = (pdfWidth - canvasWidth) / 2;
+              const marginY = (pdfHeight - canvasHeight) / 2;
 
-            if (leftHeight < pageHeight) {
-                pdf.addImage(pageData, 'PNG', marginX, marginY, canvasWidth, canvasHeight, '', this.hd ? '' : 'FAST');
+              if (leftHeight < pageHeight) {
+                  pdf.addImage(pageData, 'PNG', marginX, marginY, canvasWidth, canvasHeight, '', this.hd ? '' : 'FAST');
+              } else {
+                  while (leftHeight > 0) {
+                      pdf.addImage(pageData, 'PNG', 0, position, imgWidth, imgHeight, '', this.hd ? '' : 'FAST');
+                      leftHeight -= pageHeight;
+                      position -= standardSize.height - 24;
+                      if (leftHeight > 0) {
+                          pdf.addPage();
+                      }
+                  }
+              }
             } else {
+              if (leftHeight < pageHeight) {
+                pdf.addImage(pageData, "PNG", 0, 0, imgWidth, imgHeight, "", this.hd ?  '' : "FAST");
+              } else {
                 while (leftHeight > 0) {
-                    pdf.addImage(pageData, 'PNG', 0, position, imgWidth, imgHeight, '', this.hd ? '' : 'FAST');
-                    leftHeight -= pageHeight;
-                    position -= standardSize.height - 24;
-                    if (leftHeight > 0) {
-                        pdf.addPage();
-                    }
+                  pdf.addImage(
+                    pageData,
+                    "PNG",
+                    0,
+                    position,
+                    imgWidth,
+                    imgHeight,
+                    "",
+                    this.hd ? '' : "FAST"
+                  );
+                  leftHeight -= pageHeight;
+                  position -= standardSize.height - 24;
+                  if (leftHeight > 0) {
+                    pdf.addPage();
+                  }
                 }
+              }
             }
             pdf.save(`${new Date().toLocaleDateString()}_annotations.pdf`);
           })
@@ -2876,6 +2946,8 @@ details {
 summary {
   text-align: center;
   padding: 0 0 6px 0;
+  max-width: 600px !important;
+  margin: 0 auto;
 }
 .hide-shape {
   display: none;

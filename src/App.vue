@@ -62,6 +62,7 @@
         </div>
       </SvgAnnotator>
 
+
       <p>
         This is an example where an image is slotted:
       </p>
@@ -590,11 +591,13 @@
             Default translations:<br>
             <code style="background: white;">
               { <br>
+                &nbsp;&nbsp;autoOrientation: "auto print orientation",<br>
                 &nbsp;&nbsp;color: "Color",<br>
                 &nbsp;&nbsp;colorAlpha: "Color alpha",<br>
                 &nbsp;&nbsp;dashedLines: "Dashed lines",<br>
                 &nbsp;&nbsp;filled: "Filled",<br>
                 &nbsp;&nbsp;fontSize: "Font size",<br>
+                &nbsp;&nbsp;hdPrint: "hd print",<br>
                 &nbsp;&nbsp;thickness: "Thickness",<br>
                 &nbsp;&nbsp;title: "Annotations",<br>
                 &nbsp;&nbsp;tooltipGroup: "Select & group",<br>
