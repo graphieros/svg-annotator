@@ -324,6 +324,19 @@
             </span>
           </button>
 
+          <!-- COPY TO CLIPBOARD -->
+          <button
+            v-if="isSaveToClipboardSupported"
+            :class="{ 'svg-annotator__button-tool': true, 'svg-annotator__tooltip-svg': true }"
+            @click="print(calcOrientation(), true)"
+            :style="`height:${buttonSize}px; width:${buttonSize}px; border: 1px solid ${iconColor};`"
+          >
+            <svg style="width:80%;" viewBox="0 0 24 24"><path :stroke="iconColor" d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z" /></svg>
+            <span v-if="showTooltips" class="svg-annotator__tooltiptext">
+              {{ translations.tooltipClipboard}}
+            </span>
+          </button>
+
           <!-- PRINT AUTO -->
           <button
             v-if="showPrint && autoOrientation"
@@ -956,6 +969,16 @@
           fill="none"
         />
       </svg>
+
+      <div style=" z-index: 1000000000000; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); height: 100px; width: 300px; display: flex; flex-direction: column; align-items:center; justify-content:center; background: white; border-radius: 8px; border: 1px solid #e1e5e8; box-shadow: 0 0 6px rgba(0,0,0,0.2); padding: 24px; text-align:center;" v-if="clipboardNotSupported">
+          {{ translations.clipboardFailure }}
+         <button style="cursor: pointer; border:none; margin-top: 24px; border-radius: 8px; height: 40px; padding: 0 24px; background: #6376DD; color: white;" @click="clipboardNotSupported = false">Close</button>
+      </div>
+      <div style="z-index: 1000000000000; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); height: 100px; width: 300px; display: flex; flex-direction: column; align-items:center; justify-content:center; background: white; border-radius: 8px; border: 1px solid #e1e5e8; box-shadow: 0 0 6px rgba(0,0,0,0.2); padding: 24px; text-align:center;" v-if="clipboardSuccess">
+         {{ translations.clipboardSuccess }}
+         <button style="cursor: pointer; border:none; margin-top: 24px; border-radius: 8px; height: 40px; padding: 0 24px; background: #6376DD; color: white;" @click="clipboardSuccess = false">Close</button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -965,7 +988,6 @@
 // . visibility toggle button, showing on svg TR if shapes
 // . save to JSON emit
 // . tutorial modal
-// . add a reset method that can be called from the outside
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 export default {
@@ -1012,6 +1034,8 @@ export default {
       default() {
         return {
           autoOrientation: "auto print orientation",
+          clipboardFailure: "This functionality is not supported by your browser. Sorry",
+          clipboardSuccess: "Image successfully copied to your clipboard.",
           color: "Color",
           colorAlpha: "Color alpha",
           dashedLines: "Dashed lines",
@@ -1031,6 +1055,7 @@ export default {
           tooltipUndo: "Undo last shape",
           tooltipUngroup: "Ungroup",
           tooltipPdf: "Save pdf",
+          tooltipClipboard: "Copy to clipboard"
         };
       },
     },
@@ -1040,6 +1065,8 @@ export default {
       activeShape: undefined,
       autoOrientation: true,
       strokeSize: 1,
+      clipboardNotSupported: false,
+      clipboardSuccess: false,
       currentPointer: {
         start: {
           x: 0,
@@ -1249,6 +1276,9 @@ export default {
         default:
           return "";
       }
+    },
+    isSaveToClipboardSupported() {
+      return typeof ClipboardItem !== 'undefined';
     },
     records() {
       return this.shapes;
@@ -2683,8 +2713,8 @@ export default {
         this.move(shape);
       }
     },
-    print(orientation="p") {
-      this.isPrinting = true;
+    print(orientation="p", toClipboard = false) {
+      this.isPrinting = !toClipboard;
       this.isDeleteMode = false;
       this.isMoveMode = false;
       this.isResizeMode = false;
@@ -2729,6 +2759,17 @@ export default {
             const pageData = canvas.toDataURL("image/png", 1.0);
             const pdf = new JsPDF(orientation, "pt", "a4");
             const isOnePage = imgHeight < pageHeight;
+
+            if(toClipboard) {
+                if(typeof ClipboardItem !== 'undefined') {
+                  canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob})]));
+                  this.clipboardSuccess = true;
+                  return;
+                } else {
+                  this.clipboardNotSupported = true;
+                  return;
+                }
+            }
 
             if(isOnePage) {
               const pdfWidth = pdf.internal.pageSize.getWidth();

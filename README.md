@@ -8,6 +8,7 @@ Features:
 . select, move, resize, copy paste, delete, group & ungroup, redo shapes
 . select and group shapes in one single action
 . save to pdf (uses html2canvas & jspdf as dependencies)
+. copy to clipboard (chromium browsers only)
 . choose print orientation
 . hd or low lef print
 
@@ -98,6 +99,8 @@ If your content contains multiple elements, place them inside a single div, sect
       default() {
         return {
           autoOrientation: "auto print orientation",
+          clipboardFailure: "This functionality is not supported by your browser. Sorry",
+          clipboardSuccess: "Image successfully copied to your clipboard.",
           color: "Color",
           colorAlpha: "Color alpha",
           dashedLines: "Dashed lines",
@@ -116,7 +119,8 @@ If your content contains multiple elements, place them inside a single div, sect
           tooltipRedo: "Redo last shape",
           tooltipUndo: "Undo last shape",
           tooltipUngroup: "Ungroup",
-          tooltipPdf: "Save pdf"
+          tooltipPdf: "Save pdf",
+          tooltipClipboard: "Copy to clipboard"
         };
       },
     },
